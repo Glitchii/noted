@@ -1,6 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.Noted.manage" parent="Theme.Noted">
-        <!-- Status bar color. -->
+        <!--
+        <item name="android:background">@color/uiSecondary</item>
         <item name="android:statusBarColor">@color/uiSecondary</item>
+        <item name="android:navigationBarColor">@color/uiBackground</item>
+        -->
     </style>
 </resources>
