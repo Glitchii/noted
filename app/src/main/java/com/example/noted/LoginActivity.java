@@ -27,10 +27,18 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        // Add some valid usernames and passwords to the HashMap
+
+        // Add ten default usernames and passwords to the HashMap
         users.put("john", "password");
         users.put("luke", "123");
         users.put("mark", "abc");
+        users.put("james", "321");
+        users.put("peter", "cba");
+        users.put("mary", "pwd");
+        users.put("jane", "asdf");
+        users.put("joseph", "Joseph");
+        users.put("joshua", "Joshua123");
+        users.put("david", "abc123");
 
         // Find views
         Button submitButton = findViewById(R.id.submitButton);
@@ -61,6 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // debugAutoFill(usernameField, passwordField, submitButton);
+         debugAutoFill(usernameField, passwordField, submitButton);
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Noted</string>
+    <dimen name="paddingHorizontal">25dp</dimen>
 </resources>

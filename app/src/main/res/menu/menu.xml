@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><!-- https://developer.android.com/develop/ui/views/components/menus -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/manageFiles"
+        android:title="Manage Files" />
+    <item
+        android:id="@+id/tools"
+        android:title="Tools">
+        <menu>
+            <item
+                android:id="@+id/calc"
+                android:title="Calculator" />
+            <item
+                android:id="@+id/bgChnager"
+                android:title="Background Changer" />
+            <item
+                android:id="@+id/diceRoller"
+                android:title="Dice Roller" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/passwordChanger"
+                android:title="Change Password" />
+            <item
+                android:id="@+id/logout"
+                android:title="logout" />
+        </menu>
+    </item>
+</menu>

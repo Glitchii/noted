@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/uiBackground"
     android:orientation="vertical"
-    android:paddingHorizontal="50dp"
-    tools:context=".LoginActivity"
-    android:background="@color/uiBackground">
+    android:paddingHorizontal="@dimen/paddingHorizontal"
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:id="@+id/logoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
         android:layout_marginTop="50dp"
+        android:gravity="left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/note" />
+            app:srcCompat="@drawable/note_icon" />
 
         <TextView
             android:id="@+id/textView"
@@ -59,9 +59,9 @@
             android:id="@+id/usernameField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/uiThird"
             android:ems="10"
-            android:inputType="text"
-            android:backgroundTint="@color/uiThird" />
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/passwordText"
@@ -76,19 +76,19 @@
             android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/uiThird"
             android:ems="10"
             android:inputType="textPassword"
-            android:textColor="@color/text"
-            android:backgroundTint="@color/uiThird" />
+            android:textColor="@color/text" />
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="136dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:backgroundTint="@color/uiSecondary"
             android:text="Login"
-            android:textColor="@color/text"
-            android:backgroundTint="@color/uiSecondary"/>
+            android:textColor="@color/text" />
 
 
     </LinearLayout>

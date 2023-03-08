@@ -10,9 +10,11 @@
         <!-- <item name="colorSecondaryVariant">#2D2C31</item> -->
         <!-- <item name="colorOnSecondary">@color/black</item> -->
         <!-- Text -->
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">@color/text</item>
         <item name="android:textColorPrimary">@color/text</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:background">@color/uiBackground</item>
     </style>
 </resources>
