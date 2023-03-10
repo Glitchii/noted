@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileEditorActivity extends AppCompatActivity {
@@ -71,10 +70,10 @@ public class FileEditorActivity extends AppCompatActivity {
                 return;
             }
 
-            // Update file content.
             try {
+                // Update file content.
                 Files.write(newFile.toPath(), newContent.getBytes());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.d("DEBUG_EXCEPTION", e.toString());
                 Toast.makeText(this, (newFilename.equals(filename)) ? "Failed updating file." : "File renamed but failed updating content.", Toast.LENGTH_SHORT).show();
                 return;

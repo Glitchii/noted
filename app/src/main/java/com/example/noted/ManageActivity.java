@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class ManageActivity extends AppCompatActivity {
     ArrayList<FileCardModel> fileCardModels = new ArrayList<>();
+    FileCardRecyclerViewAdapter fileCardRecyclerViewAdapter;
     private boolean firstActivityLoad = true;
 
     @Override
@@ -77,15 +78,7 @@ public class ManageActivity extends AppCompatActivity {
         Toast.makeText(this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
 
         // Configure RecyclerView
-        FileCardRecyclerViewAdapter fileCardRecyclerViewAdapter = loadFileCards();
-
-        fileCardRecyclerViewAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeRemoved(int positionStart, int itemCount) {
-                super.onItemRangeRemoved(positionStart, itemCount);
-                // toggleNoFilesText();
-            }
-        });
+        fileCardRecyclerViewAdapter = loadFileCards();
 
         // Floating action button setup
         String finalUsername = username;
@@ -107,7 +100,7 @@ public class ManageActivity extends AppCompatActivity {
             firstActivityLoad = false;
         else
             // Reload file list on resume
-            loadFileCards();
+            fileCardRecyclerViewAdapter = loadFileCards();
     }
 
     /**
@@ -127,6 +120,14 @@ public class ManageActivity extends AppCompatActivity {
         fileCardRecyclerView.setAdapter(fileCardRecyclerViewAdapter);
         fileCardRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        fileCardRecyclerViewAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                super.onItemRangeRemoved(positionStart, itemCount);
+                toggleNoFilesText();
+            }
+        });
+
         return fileCardRecyclerViewAdapter;
     }
 
@@ -142,7 +143,8 @@ public class ManageActivity extends AppCompatActivity {
         noFilesText.setVisibility(fileCardModels.size() > 0 ? TextView.GONE : TextView.VISIBLE);
         fileList.setVisibility(fileCardModels.size() > 0 ? RecyclerView.VISIBLE : RecyclerView.GONE);
 
-        // Smooth scroll to the bottom of the RecyclerView
-        fileList.smoothScrollToPosition(fileCardModels.size() - 1);
+        if (fileCardModels.size() > 0)
+            // Smooth scroll to the bottom of the RecyclerView
+            fileList.smoothScrollToPosition(fileCardModels.size() - 1);
     }
 }
