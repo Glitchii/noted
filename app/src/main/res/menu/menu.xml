@@ -2,33 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/manageFiles"
+        android:id="@+id/action_manageFiles"
         android:title="Manage Files" />
     <item
-        android:id="@+id/tools"
+        android:id="@+id/action_tools"
         android:title="Tools">
         <menu>
             <item
-                android:id="@+id/calc"
+                android:id="@+id/action_calculator"
                 android:title="Calculator"
                 />
             <item
-                android:id="@+id/bgChnager"
+                android:id="@+id/action_background_changer"
                 android:title="Background Changer" />
             <item
-                android:id="@+id/diceRoller"
+                android:id="@+id/action_dice_roller"
                 android:title="Dice Roller" />
         </menu>
     </item>
     <item
-        android:id="@+id/settings"
+        android:id="@+id/action_settings"
         android:title="Settings">
         <menu>
             <item
-                android:id="@+id/passwordChanger"
+                android:id="@+id/action_password_changer"
                 android:title="Change Password" />
             <item
-                android:id="@+id/logout"
+                android:id="@+id/action_logout"
                 android:title="logout" />
         </menu>
     </item>

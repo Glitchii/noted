@@ -1,37 +1,62 @@
 package com.example.noted;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.StatusBarManager;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class ManageActivity extends AppCompatActivity {
+    ArrayList<FileCardModel> fileCardModels = new ArrayList<>();
+    private boolean firstActivityLoad = true;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        // Inflates the menu by adding menu items to action bar.
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_dice_roller) {
+            Toast.makeText(this, "Dice roller", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void setUpFileCardModels() {
+        File[] files = FileManager.getCustomFilesDir(this).listFiles();
+        TextView noFilesText = findViewById(R.id.noFilesText);
+        RecyclerView fileList = findViewById(R.id.fileList);
+
+        // Clear the ArrayList and RecyclerView
+        fileCardModels.clear();
+        fileList.removeAllViews();
+
+        // Loop through all files in 'files' dir to add their models to the ArrayList
+        for (File file : files)
+            if (file.isFile()) {
+                String fileName = file.getName();
+                String fileSize = file.length() + " bytes";
+
+                fileCardModels.add(new FileCardModel(fileName, fileSize));
+            }
+
+        toggleNoFilesText();
     }
 
     @Override
@@ -49,39 +74,75 @@ public class ManageActivity extends AppCompatActivity {
         username = username.substring(0, 1).toUpperCase() + username.substring(1);
 
         actionBar.setTitle(username);
-        Toast.makeText(this, "Logged in as " + username, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
 
-        try {
-            FileOutputStream fileOutputStream = openFileOutput("lol.txt", Context.MODE_PRIVATE);
-            fileOutputStream.write("Hello".getBytes());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // Configure RecyclerView
+        FileCardRecyclerViewAdapter fileCardRecyclerViewAdapter = loadFileCards();
 
-        // Get current timestamp
-        // https://strftime.org | https://stackoverflow.com/a/23068721/11848657
-        Log.d("DEBUG_TAG", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        fileCardRecyclerViewAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                super.onItemRangeRemoved(positionStart, itemCount);
+                // toggleNoFilesText();
+            }
+        });
 
-        // Create 'notes' folder where all note files will be created
-        File notesDir = new File(getFilesDir(), "notes");
-        if (!notesDir.exists())
-            notesDir.mkdir();
+        // Floating action button setup
+        String finalUsername = username;
+        findViewById(R.id.fab).setOnClickListener(v -> {
+            // Create new file on system
+            String fileName = FileManager.createFile(FileManager.getCustomFilesDir(this), finalUsername);
+            // Add filename and file size to ArrayList and update RecyclerView UI
+            fileCardModels.add(new FileCardModel(fileName, "0 bytes"));
+            fileCardRecyclerViewAdapter.notifyDataSetChanged();
+            toggleNoFilesText();
+        });
+    }
 
-        // Loop through the 'notes' directory to find any files to be displayed in list
-        File[] files = notesDir.listFiles();
-        for (File file : files)
-            Log.d("DEBUG_TAG", file.getAbsolutePath());
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        // Create new file with current time-stamp
-        // String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        // String filename = username + "-" + timestamp;
-        // try {
-        //     if (new File(notesDir, filename).createNewFile())
-        //         Log.d("DEBUG_TAG", "File " + filename + " created.");
-        // } catch (IOException e) {
-        //     throw new RuntimeException(e);
-        // }
+        if (firstActivityLoad)
+            firstActivityLoad = false;
+        else
+            // Reload file list on resume
+            loadFileCards();
+    }
+
+    /**
+     * Loads the file cards into the RecyclerView
+     *
+     * @return FileCardRecyclerViewAdapter
+     * @see FileCardRecyclerViewAdapter
+     * @see FileCardModel
+     */
+    private FileCardRecyclerViewAdapter loadFileCards() {
+        // File list recycler view setup
+        setUpFileCardModels();
+
+        // Set up RecyclerView
+        RecyclerView fileCardRecyclerView = findViewById(R.id.fileList);
+        FileCardRecyclerViewAdapter fileCardRecyclerViewAdapter = new FileCardRecyclerViewAdapter(this, fileCardModels);
+        fileCardRecyclerView.setAdapter(fileCardRecyclerViewAdapter);
+        fileCardRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        return fileCardRecyclerViewAdapter;
+    }
+
+    /**
+     * Sets the visibility of the 'no files' text based on the number of files in
+     * the ArrayList
+     */
+    public void toggleNoFilesText() {
+        // Set default text and RecyclerView visibility based on whether there are files
+        TextView noFilesText = findViewById(R.id.noFilesText);
+        RecyclerView fileList = findViewById(R.id.fileList);
+
+        noFilesText.setVisibility(fileCardModels.size() > 0 ? TextView.GONE : TextView.VISIBLE);
+        fileList.setVisibility(fileCardModels.size() > 0 ? RecyclerView.VISIBLE : RecyclerView.GONE);
+
+        // Smooth scroll to the bottom of the RecyclerView
+        fileList.smoothScrollToPosition(fileCardModels.size() - 1);
     }
 }

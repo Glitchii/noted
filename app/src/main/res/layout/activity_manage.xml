@@ -4,15 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/uiBackground"
+    android:paddingHorizontal="@dimen/padding_horizontal"
     tools:context=".ManageActivity">
+
+    <TextView
+        android:id="@+id/filesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Files"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/filesDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha=".65"
+        android:text="Tap to view or edit, hold to delete."
+        app:layout_constraintEnd_toEndOf="@+id/filesTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/filesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/filesTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:alpha=".5"
+        android:background="@color/file_card2_background_color"
+        app:layout_constraintEnd_toEndOf="@+id/filesDesc"
+        app:layout_constraintStart_toStartOf="@+id/filesDesc"
+        app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fileList"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
+
+    <FrameLayout
+        android:id="@+id/manageViewFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/file_list_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/file_list_gradient"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fileList"
+        app:layout_constraintEnd_toEndOf="@+id/fileList"
+        app:layout_constraintStart_toStartOf="@+id/fileList"></androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/noFilesText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha=".5"
+        android:text="No files to show.\nUse the plus button to add a file"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/text" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

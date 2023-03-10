@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/padding_horizontal"
+    tools:context=".FileEditorFragment">
+
+
+    <TextView
+        android:id="@+id/filesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Manage Files"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/filesDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha=".65"
+        android:text="Update file name &amp; content here"
+        app:layout_constraintEnd_toEndOf="@+id/filesTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/filesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/filesTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:alpha=".5"
+        android:background="@color/file_card2_background_color"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/filesDesc"
+        app:layout_constraintStart_toStartOf="@+id/filesDesc"
+        app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
+
+    <TextView
+        android:id="@+id/newFileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:paddingHorizontal="5dp"
+        android:text="File Name"
+        android:textColor="@color/textSecondary"
+        app:layout_constraintEnd_toEndOf="@+id/filesTitle"
+        app:layout_constraintStart_toStartOf="@+id/filesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <EditText
+        android:id="@+id/newFileNameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/uiThird"
+        android:ems="10"
+        android:hint="Enter file name"
+        android:inputType="text"
+        android:paddingBottom="20dp"
+        android:text="Example name"
+        android:textColorHint="#545356"
+        app:layout_constraintEnd_toEndOf="@+id/newFileName"
+        app:layout_constraintStart_toStartOf="@+id/newFileName"
+        app:layout_constraintTop_toBottomOf="@+id/newFileName" />
+
+    <!--
+    <EditText
+        android:id="@+id/newFileNameField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:paddingHorizontal ="10dp"
+        android:background="@drawable/file_card_background"
+        android:ems="10"
+        android:hint="Example name"
+        android:layout_marginTop="20dp"
+        android:inputType="text"
+        android:textColorHint="#545356"
+        app:layout_constraintEnd_toEndOf="@+id/newFileName"
+        app:layout_constraintStart_toStartOf="@+id/newFileName"
+        app:layout_constraintTop_toBottomOf="@+id/newFileName"
+        android:textColor="#545356" />
+        -->
+
+    <TextView
+        android:id="@+id/newFileContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingHorizontal="5dp"
+        android:text="File Content"
+        android:textColor="@color/textSecondary"
+        app:layout_constraintEnd_toEndOf="@+id/filesTitle"
+        app:layout_constraintStart_toStartOf="@+id/filesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/newFileNameField" />
+
+
+    <EditText
+        android:id="@+id/newFileContentField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/file_card_background"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="Enter text here"
+        android:inputType="textMultiLine"
+        android:minLines="7"
+        android:padding="20dp"
+
+        android:textColorHint="#545356"
+        app:layout_constraintEnd_toEndOf="@+id/newFileName"
+        app:layout_constraintStart_toStartOf="@+id/newFileName"
+        app:layout_constraintTop_toBottomOf="@+id/newFileContent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fileUpdateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/file_card_background_color"
+        android:text="Update"
+        android:textColor="@color/text"
+        app:layout_constraintStart_toStartOf="@+id/newFileContentField"
+        app:layout_constraintTop_toBottomOf="@+id/newFileContentField" />
+</androidx.constraintlayout.widget.ConstraintLayout>

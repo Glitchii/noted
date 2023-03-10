@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="316dp"
+        android:id="@+id/fileCard"
+        android:layout_width="match_parent"
         android:layout_height="88dp"
+        app:cardBackgroundColor="#29292A"
+        app:cardCornerRadius="@dimen/file_card_border_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,25 +18,25 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#29292A"
+            android:layout_height="wrap_content"
+            android:background="@drawable/file_card_background"
             android:padding="14dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="#3E3C41"
+                android:background="@drawable/file_card2_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/fileIcon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/file_icon"
-                    android:background=""
+                    android:background="@color/file_card2_background_color"
+                    android:src="@drawable/ic_file"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
@@ -42,27 +45,58 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/fileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background=""
-                android:text="John 2023-03-09 13:03"
+                android:layout_marginLeft="30dp"
+                android:background="@color/file_card_background_color"
+                android:text="John 2023-03-09 17:15"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.298"
                 app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.231" />
+                app:layout_constraintVertical_bias="0" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/fileSizeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha=".5"
-                android:background=""
-                android:text="File size: 4 GB "
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                android:background="@color/file_card_background_color"
+                android:text="File size:"
+                app:layout_constraintStart_toStartOf="@+id/fileName"
+                app:layout_constraintTop_toBottomOf="@+id/fileName" />
+
+            <TextView
+                android:id="@+id/fileSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha=".5"
+                android:background="@color/file_card_background_color"
+                android:paddingLeft="5dp"
+                android:text="4 GB"
+                app:layout_constraintStart_toEndOf="@+id/fileSizeText"
+                app:layout_constraintTop_toBottomOf="@+id/fileName" />
+
+            <TextView
+                android:id="@+id/creatorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha=".5"
+                android:background="@color/file_card_background_color"
+                android:text="By"
+                app:layout_constraintStart_toStartOf="@+id/fileSizeText"
+                app:layout_constraintTop_toBottomOf="@+id/fileSize" />
+
+            <TextView
+                android:id="@+id/creator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha=".5"
+                android:background="@color/file_card_background_color"
+                android:paddingLeft="5dp"
+                android:text="John"
+                app:layout_constraintStart_toEndOf="@+id/creatorText"
+                app:layout_constraintTop_toBottomOf="@+id/fileSize" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
