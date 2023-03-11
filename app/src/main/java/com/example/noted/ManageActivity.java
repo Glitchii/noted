@@ -1,5 +1,6 @@
 package com.example.noted;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,10 +32,18 @@ public class ManageActivity extends GlobalAppCompatActivity {
 
         if (id == R.id.action_logout)
             logout();
+
+        Intent intent = null;
+
         if (id == R.id.action_dice_roller) {
             Toast.makeText(this, "Dice roller", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_background_changer) {
+            intent = new Intent(ManageActivity.this, BackgroundSwitcherActivity.class);
         }
 
+        if (intent != null)
+            startActivity(intent);
+        
         return super.onOptionsItemSelected(item);
     }
 

@@ -2,4 +2,5 @@
     <string name="app_name">Noted</string>
     <dimen name="padding_horizontal">25dp</dimen>
     <dimen name="file_card_border_radius">7dp</dimen>
+    <string name="background_switcher_reset_button_text"><u>Reset</u></string>
 </resources>

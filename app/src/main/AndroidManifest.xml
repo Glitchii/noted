@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Noted"
         tools:targetApi="31">
         <activity
+            android:name=".BackgroundSwitcherActivity"
+            android:exported="false" />
+        <activity
             android:name=".FileEditorActivity"
             android:exported="false" />
         <activity

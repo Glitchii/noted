@@ -71,6 +71,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // debugAutoFill(usernameField, passwordField, submitButton);
+        debugAutoFill(usernameField, passwordField, submitButton);
     }
 }

@@ -14,7 +14,7 @@
                 />
             <item
                 android:id="@+id/action_background_changer"
-                android:title="Background Changer" />
+                android:title="Background Switcher" />
             <item
                 android:id="@+id/action_dice_roller"
                 android:title="Dice Roller" />

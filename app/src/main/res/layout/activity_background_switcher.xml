@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/uiBackground"
+    android:paddingHorizontal="@dimen/padding_horizontal"
+    tools:context=".BackgroundSwitcherActivity">
+
+    <TextView
+        android:id="@+id/filesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Background Switcher"
+        android:textSize="17sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/filesDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha=".65"
+        android:text="Click preview box for colour suggestions"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/filesTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/filesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/filesTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:alpha=".5"
+        android:background="@color/file_card2_background_color"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/filesDesc"
+        app:layout_constraintStart_toStartOf="@+id/filesDesc"
+        app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
+
+    <TextView
+        android:id="@+id/hexTitle"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:alpha=".5"
+        android:text="Hex Code"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <EditText
+        android:id="@+id/hexBox"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/file_card_background"
+        android:hint="#272627"
+        android:textAlignment="center"
+        android:textColor="@color/text"
+        android:textColorHint="#545356"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hexTitle" />
+
+    <TextView
+        android:id="@+id/suggestionsTitle"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:alpha=".5"
+        android:text="Suggestions"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hexBox" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/switchBox"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/file_card_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/suggestionsTitle">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="30dp"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#131714" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="30dp"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#191211" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="30dp"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#171721" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="30dp"
+                android:layout_height="38dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#181406" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/resetTitle"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/background_switcher_reset_button_text"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchBox" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
