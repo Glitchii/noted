@@ -1,12 +1,11 @@
 package com.example.noted;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,16 +67,27 @@ public class Utils {
         return filesDir.getAbsolutePath();
     }
 
-    /**
-     * Sets action bar text and background colour.
-     *
-     * @return ActionBar
-     */
-    public static ActionBar actionBarConfig(AppCompatActivity activity, String username) {
-        ActionBar actionBar = activity.getSupportActionBar();
-        activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(activity.getColor(R.color.uiBackground)));
-        actionBar.setTitle(username);
+    public static String readFile(File file) throws Exception {
+        // openFileInput() only reads relative paths (https://stackoverflow.com/a/5963552/11848657)
+        // Files.readAllBytes() is short and works (https://stackoverflow.com/a/326440/11848657)
+        // But might not be great option when reading large files.
+        // Using BufferedReader is more Efficient (https://mkyong.com/java/java-how-to-read-a-file/)
+        // Especially when used with StringBuilder().append() instead of (+)
 
-        return actionBar;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+
+        while ((line = reader.readLine()) != null)
+            stringBuilder.append(line);
+
+        reader.close();
+        return stringBuilder.toString();
+    }
+
+    public static void writeToFile(File file, String content) throws Exception {
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(content.getBytes());
+        fos.close();
     }
 }

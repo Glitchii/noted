@@ -51,7 +51,6 @@ public class FileCardRecyclerViewAdapter extends RecyclerView.Adapter<FileCardRe
     public void onBindViewHolder(@NonNull FileCardRecyclerViewAdapter.CustomViewHolder holder, int position) {
         holder.fileNameTextView.setText(fileCardModels.get(position).getFileName());
         holder.fileSizeTextView.setText(fileCardModels.get(position).getFileSize());
-        holder.creatorTextView.setText(fileCardModels.get(position).getCreator());
 
         // Long click listener to delete file
         holder.itemView.setOnLongClickListener(v -> {
@@ -75,7 +74,6 @@ public class FileCardRecyclerViewAdapter extends RecyclerView.Adapter<FileCardRe
             File file = new File(Utils.getAbsPath(context, model.getFileName()));
 
             intent.putExtra("filename", model.getFileName());
-            intent.putExtra("username", model.getCreator());
 
             if (!file.exists()) {
                 Toast.makeText(context, "File no longer exists.", Toast.LENGTH_SHORT).show();
@@ -93,13 +91,12 @@ public class FileCardRecyclerViewAdapter extends RecyclerView.Adapter<FileCardRe
     }
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
-        public TextView fileNameTextView, fileSizeTextView, creatorTextView;
+        public TextView fileNameTextView, fileSizeTextView;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             fileNameTextView = itemView.findViewById(R.id.fileName);
             fileSizeTextView = itemView.findViewById(R.id.fileSize);
-            creatorTextView = itemView.findViewById(R.id.creator);
         }
     }
 }

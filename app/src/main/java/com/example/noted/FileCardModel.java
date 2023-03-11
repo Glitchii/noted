@@ -15,8 +15,4 @@ public class FileCardModel {
     public String getFileSize() {
         return fileSize;
     }
-
-    public String getCreator() {
-        return getFileName().split(" ")[0];
-    }
 }

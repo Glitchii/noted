@@ -61,13 +61,14 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/uiThird"
             android:ems="10"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColorHint="#545356" />
 
         <TextView
             android:id="@+id/passwordText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="20dp"
             android:paddingHorizontal="5dp"
             android:text="Password"
             android:textColor="@color/textSecondary" />
@@ -79,7 +80,8 @@
             android:backgroundTint="@color/uiThird"
             android:ems="10"
             android:inputType="textPassword"
-            android:textColor="@color/text" />
+            android:textColor="@color/text"
+            android:textColorHint="#545356" />
 
         <Button
             android:id="@+id/submitButton"

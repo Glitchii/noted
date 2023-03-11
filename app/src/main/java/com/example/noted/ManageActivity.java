@@ -1,6 +1,5 @@
 package com.example.noted;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,14 +7,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ManageActivity extends AppCompatActivity {
+public class ManageActivity extends GlobalAppCompatActivity {
     ArrayList<FileCardModel> fileCardModels = new ArrayList<>();
     FileCardRecyclerViewAdapter fileCardRecyclerViewAdapter;
     private boolean firstActivityLoad = true;
@@ -31,6 +29,8 @@ public class ManageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
+        if (id == R.id.action_logout)
+            logout();
         if (id == R.id.action_dice_roller) {
             Toast.makeText(this, "Dice roller", Toast.LENGTH_SHORT).show();
         }
@@ -40,7 +40,6 @@ public class ManageActivity extends AppCompatActivity {
 
     public void setUpFileCardModels() {
         File[] files = Utils.getCustomFilesDir(this).listFiles();
-        TextView noFilesText = findViewById(R.id.noFilesText);
         RecyclerView fileList = findViewById(R.id.fileList);
 
         // Clear the ArrayList and RecyclerView
@@ -62,27 +61,15 @@ public class ManageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage);
+        super.configure(R.layout.activity_manage);
 
-        String username;
-        Intent intent = getIntent();
-
-        // Get username from intent shared from LoginActivity
-        username = intent.getStringExtra("username");
-        // Capitalize the first letter of the username
-        username = username.substring(0, 1).toUpperCase() + username.substring(1);
-
-        // Configure action bar
-        Utils.actionBarConfig(this, username);
-
-        // Configure RecyclerView
+        // Setup file list RecyclerView
         fileCardRecyclerViewAdapter = loadFileCards();
 
-        // Floating action button setup
-        String finalUsername = username;
+        // Floating 'add' action button setup
         findViewById(R.id.fab).setOnClickListener(v -> {
             // Create new file on system
-            String fileName = Utils.createFile(Utils.getCustomFilesDir(this), finalUsername);
+            String fileName = Utils.createFile(Utils.getCustomFilesDir(this), username);
             // Add filename and file size to ArrayList and update RecyclerView UI
             fileCardModels.add(new FileCardModel(fileName, "0 bytes"));
             fileCardRecyclerViewAdapter.notifyDataSetChanged();

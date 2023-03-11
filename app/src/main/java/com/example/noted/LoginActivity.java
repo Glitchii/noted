@@ -1,25 +1,25 @@
 package com.example.noted;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
+    // Define a HashMap to store valid usernames and passwords
+    private final HashMap<String, String> users = new HashMap<>();
+
     // Inserts text into the username and password fields for testing purposes.
     private void debugAutoFill(EditText username, EditText password, Button submit) {
         username.setText("john");
         password.setText("password");
         submit.performClick();
     }
-
-    // Define a HashMap to store valid usernames and passwords
-    private HashMap<String, String> users = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +63,14 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Incorrect username or password.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            
+
             Intent intent = new Intent(LoginActivity.this, ManageActivity.class);
             intent.putExtra("username", username);
+            //developer.android.com/reference/android/content/Intent#constants_1
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
 
-         debugAutoFill(usernameField, passwordField, submitButton);
+        // debugAutoFill(usernameField, passwordField, submitButton);
     }
 }
