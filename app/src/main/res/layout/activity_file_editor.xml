@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/uiBackground"
     android:paddingHorizontal="@dimen/padding_horizontal"
-    tools:context=".FileEditorFragment">
+    tools:context=".FileEditorActivity">
 
 
     <TextView
@@ -14,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Manage Files"
+        android:textColor="@color/text"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +116,6 @@
         android:inputType="textMultiLine"
         android:minLines="7"
         android:padding="20dp"
-
         android:textColorHint="#545356"
         app:layout_constraintEnd_toEndOf="@+id/newFileName"
         app:layout_constraintStart_toStartOf="@+id/newFileName"

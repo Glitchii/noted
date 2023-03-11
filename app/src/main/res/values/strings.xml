@@ -2,9 +2,4 @@
     <string name="app_name">Noted</string>
     <dimen name="padding_horizontal">25dp</dimen>
     <dimen name="file_card_border_radius">7dp</dimen>
-    <!--    <color name="file_card_background_color">#29292A</color>-->
-    <color name="file_card_background_color">#272627</color>
-    <color name="file_card2_background_color">#3E3C41</color>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

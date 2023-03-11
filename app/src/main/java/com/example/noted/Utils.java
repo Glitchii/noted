@@ -1,7 +1,9 @@
 package com.example.noted;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
@@ -9,13 +11,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FileManager extends AppCompatActivity {
+public class Utils {
 
     /**
      * Creates a new file using username and timestamp as the file name
      *
-     * @param filesDir
-     * @param username
      * @return The new file name
      */
     public static String createFile(File filesDir, String username) {
@@ -34,19 +34,16 @@ public class FileManager extends AppCompatActivity {
     /**
      * Deletes a file from the 'custom_files' directory
      *
-     * @param context
-     * @param filename
      * @return boolean indicating success or failure
      */
     public static boolean deleteFile(Context context, String filename) {
-        File file = new File(FileManager.getCustomFilesDir(context), filename);
+        File file = new File(Utils.getCustomFilesDir(context), filename);
         return file.delete();
     }
 
     /**
      * Returns the 'custom_files' directory, creating it if it doesn't exist
      *
-     * @param context
      * @return The 'custom_files' directory
      */
     public static File getCustomFilesDir(Context context) {
@@ -62,14 +59,25 @@ public class FileManager extends AppCompatActivity {
     /**
      * Expands the file name to the absolute path
      *
-     * @param context
-     * @param filename
      * @return The full file path
      */
     public static String getAbsPath(Context context, String filename) {
-        File filesDir = FileManager.getCustomFilesDir(context);
+        File filesDir = Utils.getCustomFilesDir(context);
         filesDir = new File(filesDir, filename);
 
         return filesDir.getAbsolutePath();
+    }
+
+    /**
+     * Sets action bar text and background colour.
+     *
+     * @return ActionBar
+     */
+    public static ActionBar actionBarConfig(AppCompatActivity activity, String username) {
+        ActionBar actionBar = activity.getSupportActionBar();
+        activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(activity.getColor(R.color.uiBackground)));
+        actionBar.setTitle(username);
+
+        return actionBar;
     }
 }

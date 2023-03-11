@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +39,7 @@ public class ManageActivity extends AppCompatActivity {
     }
 
     public void setUpFileCardModels() {
-        File[] files = FileManager.getCustomFilesDir(this).listFiles();
+        File[] files = Utils.getCustomFilesDir(this).listFiles();
         TextView noFilesText = findViewById(R.id.noFilesText);
         RecyclerView fileList = findViewById(R.id.fileList);
 
@@ -67,15 +66,14 @@ public class ManageActivity extends AppCompatActivity {
 
         String username;
         Intent intent = getIntent();
-        ActionBar actionBar = getSupportActionBar();
 
         // Get username from intent shared from LoginActivity
         username = intent.getStringExtra("username");
         // Capitalize the first letter of the username
         username = username.substring(0, 1).toUpperCase() + username.substring(1);
 
-        actionBar.setTitle(username);
-        Toast.makeText(this, "Logged in as " + username, Toast.LENGTH_SHORT).show();
+        // Configure action bar
+        Utils.actionBarConfig(this, username);
 
         // Configure RecyclerView
         fileCardRecyclerViewAdapter = loadFileCards();
@@ -84,7 +82,7 @@ public class ManageActivity extends AppCompatActivity {
         String finalUsername = username;
         findViewById(R.id.fab).setOnClickListener(v -> {
             // Create new file on system
-            String fileName = FileManager.createFile(FileManager.getCustomFilesDir(this), finalUsername);
+            String fileName = Utils.createFile(Utils.getCustomFilesDir(this), finalUsername);
             // Add filename and file size to ArrayList and update RecyclerView UI
             fileCardModels.add(new FileCardModel(fileName, "0 bytes"));
             fileCardRecyclerViewAdapter.notifyDataSetChanged();

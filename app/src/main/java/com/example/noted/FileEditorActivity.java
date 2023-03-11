@@ -21,14 +21,14 @@ public class FileEditorActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String filename = intent.getStringExtra("filename");
-        File oldFile = new File(FileManager.getAbsPath(this, filename));
+        File oldFile = new File(Utils.getAbsPath(this, filename));
         String username = intent.getStringExtra("username");
         Button fileUpdateButton = findViewById(R.id.fileUpdateButton);
 
         EditText nameInput = findViewById(R.id.newFileNameField);
         EditText contentInput = findViewById(R.id.newFileContentField);
-
-        getSupportActionBar().setTitle(username);
+        
+        Utils.actionBarConfig(this, username);
         nameInput.setText(filename);
 
         String content;
@@ -54,8 +54,7 @@ public class FileEditorActivity extends AppCompatActivity {
                 return;
             }
 
-            File newFile = new File(FileManager.getAbsPath(this, newFilename));
-            File file = newFile;
+            File newFile = new File(Utils.getAbsPath(this, newFilename));
 
             // Make sure the old file exists before modifying.
             if (!oldFile.exists()) {

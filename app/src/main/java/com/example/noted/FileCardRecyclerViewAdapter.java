@@ -57,7 +57,7 @@ public class FileCardRecyclerViewAdapter extends RecyclerView.Adapter<FileCardRe
         holder.itemView.setOnLongClickListener(v -> {
             String filename = fileCardModels.get(position).getFileName();
 
-            if (!FileManager.deleteFile(context, filename)) {
+            if (!Utils.deleteFile(context, filename)) {
                 Toast.makeText(context, "Failed to delete '" + filename + "'", Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -72,7 +72,7 @@ public class FileCardRecyclerViewAdapter extends RecyclerView.Adapter<FileCardRe
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, FileEditorActivity.class);
             FileCardModel model = fileCardModels.get(position);
-            File file = new File(FileManager.getAbsPath(context, model.getFileName()));
+            File file = new File(Utils.getAbsPath(context, model.getFileName()));
 
             intent.putExtra("filename", model.getFileName());
             intent.putExtra("username", model.getCreator());

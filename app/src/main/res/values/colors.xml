@@ -13,4 +13,9 @@
     <color name="uiThird">#545356</color>
     <color name="text">#fff</color>
     <color name="textSecondary">#BBBBBB</color>
+    <color name="textHandleColor">#3A457C</color>
+
+    <!-- <color name="file_card_background_color">#29292A</color> -->
+    <color name="file_card_background_color">#272627</color>
+    <color name="file_card2_background_color">#3E3C41</color>
 </resources>
