@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/uiBackground"
+    android:paddingHorizontal="@dimen/padding_horizontal"
+    tools:context=".DiceRollerActivity">
+
+    <TextView
+        android:id="@+id/filesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Dice Roller"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/filesDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha=".65"
+        android:text="Roll dice for a random number between 1 and 6"
+        app:layout_constraintEnd_toEndOf="@+id/filesTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/filesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/filesTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:alpha=".5"
+        android:background="@color/file_card2_background_color"
+        app:layout_constraintEnd_toEndOf="@+id/filesDesc"
+        app:layout_constraintStart_toStartOf="@+id/filesDesc"
+        app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
+
+    <ImageView
+        android:id="@+id/dice"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:alpha="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias=".3"
+        app:srcCompat="@drawable/dice6" />
+
+    <ImageView
+        android:id="@+id/emptyDice"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias=".3"
+        app:srcCompat="@drawable/dice" />
+
+    <TextView
+        android:id="@+id/rolledTitle"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:alpha=".6"
+        android:text="Rolled: "
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dice" />
+
+    <TextView
+        android:id="@+id/rolled"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:alpha=".6"
+        android:text="6"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/rolledTitle"
+        app:layout_constraintStart_toEndOf="@+id/rolledTitle" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rollButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/file_card_background_color"
+        android:text="Roll"
+        android:textColor="@color/text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rolledTitle"
+        app:layout_constraintVertical_bias=".3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

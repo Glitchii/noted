@@ -39,7 +39,7 @@ public class BackgroundSwitcherActivity extends GlobalAppCompatActivity {
         new Handler().postDelayed(() -> Toast.makeText(this, "Colour persists after app restarts", Toast.LENGTH_SHORT).show(), 200);
 
         if (chosenBackground != null)
-            setResetButtonAlpha(1f);
+            animateIn(resetButton);
 
         hexBox.addTextChangedListener(new TextWatcher() {
             // https://developer.android.com/reference/android/text/TextWatcher
@@ -78,6 +78,13 @@ public class BackgroundSwitcherActivity extends GlobalAppCompatActivity {
                     saveBackground("#181406");
             });
         }
+
+        resetButton.setOnClickListener(v -> {
+            saveBackground(defaultBackground);
+            resetButtonShown = false;
+            animateOut(resetButton);
+            deleteConfig("background");
+        });
     }
 
     protected void saveBackground(String hex) {
@@ -92,19 +99,8 @@ public class BackgroundSwitcherActivity extends GlobalAppCompatActivity {
         // Show reset button
         if (!resetButtonShown) {
             // Fade in animation (https://stackoverflow.com/a/36660424/11848657)
-            setResetButtonAlpha(1f);
+            animateIn(resetButton);
             resetButtonShown = true;
         }
-
-        resetButton.setOnClickListener(v -> {
-            saveBackground(defaultBackground);
-            resetButtonShown = false;
-            setResetButtonAlpha(0f);
-            deleteConfig("background");
-        });
-    }
-
-    private void setResetButtonAlpha(float v) {
-        resetButton.animate().alpha(v).setDuration(500).start();
     }
 }

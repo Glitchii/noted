@@ -31,7 +31,7 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
      *
      * @return ActionBar
      */
-    public ActionBar actionBarConfig(AppCompatActivity activity, String username) {
+    private ActionBar actionBarConfig(AppCompatActivity activity, String username) {
         ActionBar actionBar = activity.getSupportActionBar();
         activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(activity.getColor(R.color.uiBackground)));
         actionBar.setTitle(username);
@@ -94,11 +94,11 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         }
     }
 
-    public void saveLogin(String username) {
+    protected void saveLogin(String username) {
         saveCofig("loggedInUser", username);
     }
 
-    public boolean saveCofig(String key, String value) {
+    protected boolean saveCofig(String key, String value) {
         // Could use Shared-Preferences (https://developer.android.com/training/data-storage/shared-preferences)
         // Instead of creating a custom file but no need for a small project like this since this also works.
 
@@ -115,23 +115,23 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         return true;
     }
 
-    public void logout() {
+    protected void logout() {
         deleteConfig("loggedInUser");
         toLoginActivity();
     }
 
-    public void deleteConfig(String key) {
+    protected void deleteConfig(String key) {
         File file = new File(getFilesDir(), '.' + key);
         if (file.exists())
             file.delete();
     }
 
-    public String getConfigValue(String key) throws Exception {
+    protected String getConfigValue(String key) throws Exception {
         File file = new File(getFilesDir(), '.' + key);
         return file.exists() ? Utils.readFile(file) : null;
     }
 
-    private void toLoginActivity() {
+    protected void toLoginActivity() {
         Intent loginIntent = new Intent(this, LoginActivity.class);
         //developer.android.com/reference/android/content/Intent
         //developer.android.com/reference/android/content/Intent#constants_1
@@ -154,5 +154,29 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor(hex));
         // Change navigation bar background colour
         getWindow().setNavigationBarColor(Color.parseColor(hex));
+    }
+
+    protected void animateIn(View v) {
+        animateIn(v, 1);
+    }
+
+    protected void animateOut(View v) {
+        animateOut(v, 500);
+    }
+
+    protected void animateIn(View v, int duration) {
+        animateIn(v, 1, duration);
+    }
+
+    protected void animateIn(View v, float maxAlpha) {
+        animateIn(v, maxAlpha, 500);
+    }
+
+    protected void animateOut(View v, int duration) {
+        v.animate().alpha(0f).setDuration(duration).start();
+    }
+
+    protected void animateIn(View v, float maxAlpha, int duration) {
+        v.animate().alpha(maxAlpha).setDuration(duration).start();
     }
 }

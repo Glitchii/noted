@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,14 +35,15 @@ public class ManageActivity extends GlobalAppCompatActivity {
         Intent intent = null;
 
         if (id == R.id.action_dice_roller) {
-            Toast.makeText(this, "Dice roller", Toast.LENGTH_SHORT).show();
+            intent = new Intent(ManageActivity.this, DiceRollerActivity.class);
         } else if (id == R.id.action_background_changer) {
             intent = new Intent(ManageActivity.this, BackgroundSwitcherActivity.class);
+        } else if (id == R.id.action_dice_roller) {
         }
 
         if (intent != null)
             startActivity(intent);
-        
+
         return super.onOptionsItemSelected(item);
     }
 
