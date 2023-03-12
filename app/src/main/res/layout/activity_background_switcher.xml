@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/uiBackground"
@@ -15,7 +16,6 @@
         android:layout_marginTop="20dp"
         android:text="Background Switcher"
         android:textSize="17sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:alpha=".65"
-        android:text="Click preview box for colour suggestions"
-        android:visibility="gone"
+        android:text="Enter six characters between 0-6 or A-F"
         app:layout_constraintEnd_toEndOf="@+id/filesTitle"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/filesTitle"
@@ -40,7 +39,6 @@
         android:layout_marginTop="50dp"
         android:alpha=".5"
         android:background="@color/file_card2_background_color"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/filesDesc"
         app:layout_constraintStart_toStartOf="@+id/filesDesc"
         app:layout_constraintTop_toBottomOf="@+id/filesDesc" />
@@ -55,8 +53,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.05" />
 
     <EditText
         android:id="@+id/hexBox"
@@ -64,7 +62,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/file_card_background"
-        android:hint="#272627"
+        android:hint="#1B1A1D"
+        android:inputType="textCapCharacters"
         android:textAlignment="center"
         android:textColor="@color/text"
         android:textColorHint="#545356"
@@ -95,6 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/suggestionsTitle">
 
         <LinearLayout
+            android:id="@+id/suggestionsBox"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -104,24 +104,28 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/cs1"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#131714" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/cs2"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#191211" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/cs3"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#171721" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/cs4"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
@@ -131,13 +135,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/resetTitle"
+        android:id="@+id/resetButton"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        android:alpha="0"
         android:text="@string/background_switcher_reset_button_text"
         android:textAlignment="center"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchBox" />
