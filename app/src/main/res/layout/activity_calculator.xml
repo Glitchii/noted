@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1F1A19"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calculator_display"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/calculator_display"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@null"
+            android:text="60+9"
+            android:textAlignment="textEnd"
+            android:textColor="@color/display_text"
+            android:textSize="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/calculations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@null"
+            android:keyboardNavigationCluster="false"
+            android:text="69"
+            android:textAlignment="textEnd"
+            android:textColor="@color/display_text"
+            android:textSize="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/feedback"
+            app:layout_constraintStart_toStartOf="@+id/feedback"
+            app:layout_constraintTop_toBottomOf="@+id/feedback" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="350dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="80dp"
+            android:alpha="0"
+            android:background="#534945"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:src="@drawable/delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/history"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/keypad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/acButton"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginRight="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons4"
+                android:outlineProvider="none"
+                android:text="AC"
+                android:textColor="@color/calculator_text"
+                android:textSize="25dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                android:id="@+id/bracketsButton"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons2"
+                android:outlineProvider="none"
+                android:paddingBottom="18dp"
+                android:text="( )"
+                android:textColor="@color/calculator_text"
+                android:textSize="25dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                android:id="@+id/percentageButton"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons2"
+                android:outlineProvider="none"
+                android:text="%"
+                android:textColor="@color/calculator_text"
+                android:textSize="25dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                android:id="@+id/divButton"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginLeft="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons2"
+                android:outlineProvider="none"
+                android:text="÷"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginRight="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="7"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="8"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="9"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginLeft="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons2"
+                android:outlineProvider="none"
+                android:text="×"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginRight="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="4"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="5"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="6"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginLeft="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons2"
+                android:outlineProvider="none"
+                android:text="-"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginRight="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="1"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="2"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#2B2322"
+                android:outlineProvider="none"
+                android:text="3"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginLeft="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons2"
+                android:outlineProvider="none"
+                android:text="+"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginRight="@dimen/calc_button_spacing"
+                android:backgroundTint="#362D2A"
+                android:outlineProvider="none"
+                android:text="0"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#362D2A"
+                android:outlineProvider="none"
+                android:text="·"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_margin="@dimen/calc_button_spacing"
+                android:backgroundTint="#362D2A"
+                android:outlineProvider="none"
+                android:paddingTop="18dp"
+                android:text="^"
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+
+            <Button
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="@dimen/button_size"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginLeft="@dimen/calc_button_spacing"
+                android:backgroundTint="@color/calculator_buttons3"
+                android:outlineProvider="none"
+                android:text="="
+                android:textColor="@color/calculator_text"
+                android:textSize="40dp"
+                app:cornerRadius="100dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,7 @@
     <dimen name="padding_horizontal">25dp</dimen>
     <dimen name="file_card_border_radius">7dp</dimen>
     <string name="background_switcher_reset_button_text"><u>Reset</u></string>
+    <dimen name="button_size">80dp</dimen>
+    <dimen name="display_border_radius">30dp</dimen>
+    <dimen name="calc_button_spacing">10dp</dimen>
 </resources>

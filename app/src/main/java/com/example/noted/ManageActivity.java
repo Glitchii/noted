@@ -28,21 +28,19 @@ public class ManageActivity extends GlobalAppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        Class activity = null;
 
         if (id == R.id.action_logout)
             logout();
+        else if (id == R.id.action_dice_roller)
+            activity = DiceRollerActivity.class;
+        else if (id == R.id.action_background_changer)
+            activity = BackgroundSwitcherActivity.class;
+        else if (id == R.id.action_calculator)
+            activity = CalculatorActivity.class;
 
-        Intent intent = null;
-
-        if (id == R.id.action_dice_roller) {
-            intent = new Intent(ManageActivity.this, DiceRollerActivity.class);
-        } else if (id == R.id.action_background_changer) {
-            intent = new Intent(ManageActivity.this, BackgroundSwitcherActivity.class);
-        } else if (id == R.id.action_dice_roller) {
-        }
-
-        if (intent != null)
-            startActivity(intent);
+        if (activity != null)
+            startActivity(new Intent(ManageActivity.this, activity));
 
         return super.onOptionsItemSelected(item);
     }
