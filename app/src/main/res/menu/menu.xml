@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?><!-- https://developer.android.com/develop/ui/views/components/menus -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_manageFiles"
         android:title="Manage Files" />
+
     <item
         android:id="@+id/action_tools"
         android:title="Tools">
         <menu>
             <item
                 android:id="@+id/action_calculator"
-                android:title="Calculator"
-                />
+                android:title="Calculator" />
             <item
                 android:id="@+id/action_background_changer"
                 android:title="Background Switcher" />
@@ -20,16 +19,8 @@
                 android:title="Dice Roller" />
         </menu>
     </item>
+
     <item
-        android:id="@+id/action_settings"
-        android:title="Settings">
-        <menu>
-            <item
-                android:id="@+id/action_password_changer"
-                android:title="Change Password" />
-            <item
-                android:id="@+id/action_logout"
-                android:title="logout" />
-        </menu>
-    </item>
+        android:id="@+id/action_logout"
+        android:title="Logout" />
 </menu>

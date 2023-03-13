@@ -58,9 +58,9 @@ public class DiceRollerActivity extends GlobalAppCompatActivity {
 
             rolledText.setText(Integer.toString(randomNumber));
             animateIn(dice);
-            animateOut(emptyDice, 400);
-            animateIn(rolledText, .6f, 400);
-        }, 400);
+            animateOut(emptyDice);
+            animateIn(rolledText, .6f);
+        }, 500);
     }
 
 }
