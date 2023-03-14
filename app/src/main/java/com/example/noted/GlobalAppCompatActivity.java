@@ -19,8 +19,9 @@ import java.io.FileOutputStream;
 /**
  * Inherited by Activity classes, inherits AppCompatActivity.
  * <li>Checks if user is logged in before rendering views.</li>
- * <li>Sets up action bar if needed.</li>
- * ...
+ * <li>Loads configs eg. custom background set by user and applies to page</li>
+ * <li>Sets up action bar with title and background colour if needed.</li>
+ * <li><i>etc.</i></li>
  */
 public class GlobalAppCompatActivity extends AppCompatActivity {
     protected Intent intent;

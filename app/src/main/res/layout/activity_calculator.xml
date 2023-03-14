@@ -57,7 +57,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="35dp"
@@ -68,6 +68,7 @@
             app:layout_constraintVertical_bias="0.6" />
 
         <ImageView
+            android:id="@+id/history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -350,8 +351,9 @@
                 android:layout_margin="@dimen/calc_button_spacing"
                 android:backgroundTint="#362D2A"
                 android:outlineProvider="none"
-                android:paddingTop="18dp"
-                android:text="^"
+                android:paddingTop="-18dp"
+                android:text="π"
+                android:textAllCaps="false"
                 android:textColor="@color/calculator_text"
                 android:textSize="40dp"
                 app:cornerRadius="100dp" />
