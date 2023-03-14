@@ -1,18 +1,19 @@
 package com.example.noted;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends GlobalAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.configure();
 
-        Intent loginIntent = new Intent(MainActivity.this, CalculatorActivity.class);
-        startActivity(loginIntent);
+        if (username == null)
+            // If a username is not available, it means no one is logged in.
+            replaceActivity(MainActivity.this, LoginActivity.class);
+        else
+            // Otherwise if someone is logged in, we skip login page util they logout.
+            replaceActivity(MainActivity.this, ManageActivity.class);
     }
 }

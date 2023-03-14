@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
  */
 public class GlobalAppCompatActivity extends AppCompatActivity {
     protected Intent intent;
+    protected boolean loginRequired = true;
     protected String username, chosenBackground, defaultBackground = "#1B1A1D";
 
     /**
@@ -40,25 +41,26 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     * Loads layout and configures the action bar if necessary.
+     * Loads layout and configures the action bar if necessary, username, etc.
      *
      * @param layout ID of layout resource to load
      */
     protected void configure(int layout) {
         setContentView(layout);
+        configure();
+    }
 
-        intent = getIntent();
-        username = intent.getStringExtra("username");
-
-        if (username != null)
-            saveLogin(username);
-
-        checkConfigs();
-
-        // Capitalise the first letter of the username
-        username = username.substring(0, 1).toUpperCase() + username.substring(1);
-        // Configure action bar
-        actionBarConfig(this, username);
+    /**
+     * Replaces activity pressing back button from newActivityClass doesn't go to currentActivityContext
+     *
+     * @param currentActivityContext eg. X.this
+     * @param newActivityClass       eg. Y.class
+     */
+    protected void replaceActivity(Context currentActivityContext, Class newActivityClass) {
+        Intent loginIntent = new Intent(currentActivityContext, newActivityClass);
+        //developer.android.com/reference/android/content/Intent#constants_1
+        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(loginIntent);
     }
 
     @Override
@@ -71,17 +73,24 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     }
 
     private void checkConfigs() {
-        try {
-            // Check whether any user is still logged in.
-            username = getConfigValue("loggedInUser");
-            if (username == null)
-                // Starts login activity if no one is logged in.
+        if (loginRequired)
+            try {
+                // Check whether any user is still logged in.
+                username = getConfigValue("loggedInUser");
+                if (username != null)
+                    // Capitalise the first letter of the username
+                    username = username.substring(0, 1).toUpperCase() + username.substring(1);
+                else {
+                    // Start login activity if no one is logged in.
+                    toLoginActivity();
+                    return;
+                }
+
+            } catch (Exception e) {
+                Log.d("DEBUG_LOGIN_SAVE", e.toString());
+                Toast.makeText(this, "Failed finding who is logged in", Toast.LENGTH_SHORT).show();
                 toLoginActivity();
-        } catch (Exception e) {
-            Log.d("DEBUG_LOGIN_SAVE", e.toString());
-            Toast.makeText(this, "Failed finding who is logged in", Toast.LENGTH_SHORT).show();
-            toLoginActivity();
-        }
+            }
 
         try {
             // Check whether a custom background was set colour
@@ -92,10 +101,6 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
             Snackbar.make(findViewById(android.R.id.content), e.toString(), Snackbar.LENGTH_LONG);
             Toast.makeText(this, chosenBackground, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    protected void saveLogin(String username) {
-        saveCofig("loggedInUser", username);
     }
 
     protected boolean saveCofig(String key, String value) {
@@ -154,6 +159,18 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor(hex));
         // Change navigation bar background colour
         getWindow().setNavigationBarColor(Color.parseColor(hex));
+    }
+
+    /**
+     * Configures without loading layout
+     *
+     * @see configure(int layout)
+     */
+    protected void configure() {
+        // Retrieve username from intent/storage and configure it for the activity.
+        checkConfigs();
+        // Configure action bar colour and background
+        actionBarConfig(this, username);
     }
 
     protected void animateIn(View v) {
