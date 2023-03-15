@@ -165,7 +165,7 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     /**
      * Configures without loading layout
      *
-     * @see configure(int layout)
+     * @see #configure(int layout)
      */
     protected void configure() {
         // Retrieve username from intent/storage and configure it for the activity.
