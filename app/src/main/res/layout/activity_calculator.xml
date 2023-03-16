@@ -24,7 +24,6 @@
             android:layout_marginHorizontal="20dp"
             android:background="@null"
             android:maxLines="1"
-            android:singleLine="true"
             android:textAlignment="textEnd"
             android:textColor="@color/display_text"
             android:textSize="80dp"
@@ -39,6 +38,8 @@
             android:layout_marginHorizontal="20dp"
             android:background="@null"
             android:keyboardNavigationCluster="false"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textAlignment="textEnd"
             android:textColor="@color/display_text2"
             android:textSize="40dp"
@@ -50,9 +51,9 @@
             android:id="@+id/constraintLayout"
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_marginBottom="80dp"
-            android:alpha="0"
-            android:background="#534945"
+            android:layout_marginBottom="60dp"
+            android:alpha=".05"
+            android:background="@color/calculator_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -67,7 +68,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <ImageView
             android:id="@+id/history"
@@ -79,7 +80,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.6" />
+            app:layout_constraintVertical_bias="0.5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
