@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class CalculatorActivity extends GlobalAppCompatActivity {
     EditText feedback;
@@ -22,6 +23,32 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
     // keyboard will be disabled so they can't inject code. Either way, it's their device, plus the code is ran in a sandbox.
     // https://stackoverflow.com/a/2605051/11848657, https://github.com/APISENSE/rhino-android.
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("js");
+
+    /**
+     * Recursive method to turn arithmetic inside braces into absolute numbers
+     * <br><br>
+     * Eg. (2*7) becomes 14 and 31+((4+1)+2*7)*2 becomes 31+19*2 <br>
+     *
+     * @param expr The mathematical expression to evaluate.
+     * @return The result of the expression.
+     * @throws ScriptException if the expression is invalid or contains unsupported operators.
+     */
+    public String evalBraces(String expr) throws ScriptException {
+        // Check if expression contains braces
+        if (expr.contains("(")) {
+            // Find the innermost set of braces
+            int left = expr.lastIndexOf("(");
+            int right = left + expr.substring(left).indexOf(")");
+            // Evaluate the expression within the braces
+            double result = (double) engine.eval(expr.substring(left + 1, right));
+            // Replace the expression within the braces with its result
+            expr = expr.substring(0, left) + result + expr.substring(right + 1);
+            // Recursively evaluate any remaining expressions within braces
+            expr = evalBraces(expr);
+        }
+        // Evaluate the final expression
+        return expr;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,25 +185,34 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
      * Method is called when a button is pressed, unlike forceEvaluate() which is called only when equals button is pressed.
      */
     private void evaluate() {
-        String text = feedback.getText().toString()
-                // Replace out all operators with their corresponding script operators
-                .replace('×', '*')
-                .replace('÷', '/')
-                .replace('·', '.')
-                .replace("^", "**") // Just a place holder, ** not supported, we need to call Math.pow
-                .replace("%", "/100.0*"); // % is for percentage not modulo
-
         try {
+            // We remove braces first so it's easier to replace operators with their corresponding functions eg. ^ with Math.pow
+            String text = evalBraces(feedback.getText().toString());
+
+            text = text
+                    // Replace out all operators with their corresponding script operators
+                    .replace('×', '*')
+                    .replace('÷', '/')
+                    .replace('·', '.')
+                    .replace("%", "/100.0*") // % is for percentage not modulo
+                    // Replace ^ with Math.pow function using with regular expression groups (https://docs.oracle.com/javase/tutorial/essential/regex/groups.html, https://docs.oracle.com/javase/tutorial/essential/regex/pattern.html)
+                    .replaceAll("(-?[.0-9]+)\\^(-?[.0-9]+)", "Math.pow($1, $2)") // Regex tested at https://regex101.com/r/vti1r5/3
+                    // 5^2^5 would resulted to Math.pow(5, 2)^5 instead of Math.pow(Math.pow(5, 2), 5), so we need to do it again
+                    .replaceAll("(Math.pow\\(-?[.0-9]+, *-?[.0-9]+\\))\\^(-?[.0-9]+)", "Math.pow($1, $2)");
+
             if (text.length() < 1)
-                // Throwing an exception to be caught so to clear the calculation field
+                // Exception thrown below will be caught to clear the calculation field
+                throw new IllegalArgumentException(); // RuntimeException?
+
+            Double results = (Double) engine.eval(text);
+            if (results == null)
                 throw new NullPointerException();
-            if (text.length() > 1) {
-                Double results = (Double) engine.eval(text);
-                if (results == null)
-                    throw new NullPointerException();
-                // Show evaluation without the ending .0
-                calculations.setText(String.valueOf(results).replaceFirst("\\.0$", ""));
-            }
+            else if (results.toString().equals("Infinity") || results.toString().equals("NaN"))
+                // Text could be "Infinity" if user tries to divide by zero
+                // It could be "NaN" if user finds a way to inject letters into the expression
+                throw new RuntimeException(); // ArithmeticException?
+            // Show evaluation with the unnecessary .0 stripped from the end
+            calculations.setText(String.valueOf(results).replaceFirst("\\.0$", ""));
         } catch (Exception e) {
             // Clear calculation field
             calculations.setText("");
@@ -194,7 +230,7 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
         evaluate();
 
         if (calculations.getText().equals("")) {
-            calculations.setText("Incorrect input");
+            calculations.setText("Invalid input");
             return;
         }
 
