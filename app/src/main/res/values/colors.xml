@@ -20,18 +20,18 @@
     <color name="file_card2_background_color">#3E3C41</color>
 
     <!-- Calculator -->
-    <color name="calculator_background">#1F1A19</color>
-    <color name="calculator_display">#433531</color>
+    <color name="calculator_background">@color/uiBackground</color>
+    <color name="calculator_display">#2D2B30</color>
     <color name="calculator_display2">#3c302d</color>
     <color name="calculator_display_down">#272627</color>
     <color name="calculator_button">#545356</color>
-    <color name="display_text">#eadfdd</color>
-    <color name="display_text2">#d2c1bd</color>
-    <color name="display_cursor">#ffcabd</color>
-    <color name="calculator_text">#f4d7d2</color>
+    <color name="display_text">#EEEFFF</color>
+    <color name="display_text2">#B3B3C1</color>
+    <color name="display_cursor">#B2B4FE</color>
+    <color name="calculator_text">#EEEFFF</color>
     <color name="calculator_buttons">#292120</color>
-    <color name="calculator_buttons2">#59403c</color>
-    <color name="calculator_buttons3">#6b382e</color>
-    <color name="calculator_buttons4">#534520</color>
+    <color name="calculator_buttons2">#2D2C2C</color>
+    <color name="calculator_buttons3">#35303F</color>
+    <color name="calculator_buttons4">#2D2B30</color>
     <color name="calculator_buttons5">#292120</color>
 </resources>

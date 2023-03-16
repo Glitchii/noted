@@ -20,7 +20,7 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
     LinearLayout keypad;
     ArrayList<String> previousCalculations = new ArrayList<>();
     // Evaluation is done with ScriptEngineManager. User can only enter numbers and other items on the keypad as
-    // keyboard will be disabled so they can't inject code. Either way, it's their device, plus the code is ran in a sandbox.
+    // keyboard will be disabled and non-arithmetic characters will not be evaluated, so they can't inject code. See evaluate()
     // https://stackoverflow.com/a/2605051/11848657, https://github.com/APISENSE/rhino-android.
     ScriptEngine engine = new ScriptEngineManager().getEngineByName("js");
 
@@ -52,6 +52,7 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.topSectionMatchesTheme = false;
         super.onCreate(savedInstanceState);
         super.configure(R.layout.activity_calculator);
 
@@ -186,10 +187,19 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
      */
     private void evaluate() {
         try {
-            // We remove braces first so it's easier to replace operators with their corresponding functions eg. ^ with Math.pow
-            String text = evalBraces(feedback.getText().toString());
 
-            text = text
+            String text = feedback.getText().toString();
+
+            // Check if input contains only numbers and operators before proceeding.
+            if (!text.matches("^[0-9×÷\\-+^%()\\.]*$"))
+                // The EditText view has its keyboard disabled to prevent users from entering invalid characters,
+                // but it's still possible for them to copy and paste text, or use a physical keyboard (etc.) to input
+                // characters that are not allowed. Doesn't make sense for them to do this but we'll handle it anyway.
+                // Without this check, an input like 'true ? 1 : 0' would evaluate to 1.
+                throw new Exception();
+
+            // We remove braces first so it's easier to replace operators with their corresponding functions eg. ^ with Math.pow
+            text = evalBraces(text)
                     // Replace out all operators with their corresponding script operators
                     .replace('×', '*')
                     .replace('÷', '/')

@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
  */
 public class GlobalAppCompatActivity extends AppCompatActivity {
     protected Intent intent;
-    protected boolean loginRequired = true;
+    protected boolean loginRequired = true, topSectionMatchesTheme = true;
     protected String username, chosenBackground, defaultBackground = "#1B1A1D";
 
     /**
@@ -154,12 +154,15 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
 
         // Change background colour
         root.setBackground(colorDrawable);
-        // Change action bar background colour
-        getSupportActionBar().setBackgroundDrawable(colorDrawable);
-        // Change status bar background colour
-        getWindow().setStatusBarColor(Color.parseColor(hex));
         // Change navigation bar background colour
         getWindow().setNavigationBarColor(Color.parseColor(hex));
+
+        if (topSectionMatchesTheme) {
+            // Change action bar background colour
+            getSupportActionBar().setBackgroundDrawable(colorDrawable);
+            // Change status bar background colour
+            getWindow().setStatusBarColor(Color.parseColor(hex));
+        }
     }
 
     /**
