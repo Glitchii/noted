@@ -18,6 +18,7 @@
     <!-- <color name="file_card_background_color">#29292A</color> -->
     <color name="file_card_background_color">#272627</color>
     <color name="file_card2_background_color">#3E3C41</color>
+    <color name="file_card3_background_color">#28302A</color>
 
     <!-- Calculator -->
     <color name="calculator_background">@color/uiBackground</color>
