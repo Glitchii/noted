@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/rangeTitle"
+        android:id="@+id/rangeTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -33,35 +33,35 @@
         app:layout_constraintTop_toBottomOf="@+id/filesTitle" />
 
     <TextView
-        android:id="@+id/range"
+        android:id="@+id/rangeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha=".65"
         android:paddingLeft="5dp"
         android:text="1 / 10"
-        app:layout_constraintBottom_toBottomOf="@+id/rangeTitle"
-        app:layout_constraintStart_toEndOf="@+id/rangeTitle"
-        app:layout_constraintTop_toTopOf="@+id/rangeTitle" />
+        app:layout_constraintBottom_toBottomOf="@+id/rangeTextTitle"
+        app:layout_constraintStart_toEndOf="@+id/rangeTextTitle"
+        app:layout_constraintTop_toTopOf="@+id/rangeTextTitle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bar"
+        android:id="@+id/rangeBackground"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:layout_marginTop="20dp"
         android:alpha=".5"
         android:background="@drawable/file_card2_background"
-        app:layout_constraintEnd_toEndOf="@+id/range"
+        app:layout_constraintEnd_toEndOf="@+id/rangeText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/range" />
+        app:layout_constraintTop_toBottomOf="@+id/rangeText" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bar_filler"
+        android:id="@+id/rangeSlider"
         android:layout_width="180dp"
         android:layout_height="10dp"
-        android:background="@drawable/file_card3_background"
-        app:layout_constraintBottom_toBottomOf="@+id/bar"
+        android:background="@drawable/answer_correct_background"
+        app:layout_constraintBottom_toBottomOf="@+id/rangeBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bar" />
+        app:layout_constraintTop_toTopOf="@+id/rangeBackground" />
 
     <TextView
         android:id="@+id/questionText"
@@ -69,12 +69,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="What type of port is this?"
-        app:layout_constraintTop_toBottomOf="@+id/bar" />
+        app:layout_constraintTop_toBottomOf="@+id/rangeBackground" />
 
     <ImageView
         android:id="@+id/questionImage"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="100dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/mini_displayport"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,6 @@
                 android:id="@+id/optionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/file_card_background_color"
                 android:text="Mini HDMI"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#6879B5"
+                android:checked="false"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/optionText"
@@ -138,7 +138,6 @@
                 android:id="@+id/optionText2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/file_card_background_color"
                 android:text="Thunderbolt 2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -149,6 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#6879B5"
+                android:checked="false"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/optionText2"
@@ -160,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/file_card3_background"
+            android:background="@drawable/file_card_background"
             android:paddingLeft="25dp"
             android:paddingRight="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -180,8 +180,8 @@
                 android:id="@+id/radioButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="#7AA183"
-                android:checked="true"
+                android:buttonTint="#6879B5"
+                android:checked="false"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/optionText3"
@@ -203,7 +203,6 @@
                 android:id="@+id/optionText4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/file_card_background_color"
                 android:text="Micro USB"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -214,6 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#6879B5"
+                android:checked="false"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/optionText4"

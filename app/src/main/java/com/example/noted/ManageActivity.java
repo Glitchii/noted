@@ -32,6 +32,8 @@ public class ManageActivity extends GlobalAppCompatActivity {
 
         if (id == R.id.action_logout)
             logout();
+        else if (id == R.id.action_quiz)
+            activity = Quiz.class;
         else if (id == R.id.action_dice_roller)
             activity = DiceRollerActivity.class;
         else if (id == R.id.action_background_changer)
