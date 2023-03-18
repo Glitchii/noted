@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="@+id/bar" />
 
     <TextView
-        android:id="@+id/question"
+        android:id="@+id/questionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -72,24 +72,24 @@
         app:layout_constraintTop_toBottomOf="@+id/bar" />
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/questionImage"
         android:layout_width="wrap_content"
         android:layout_height="130dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/mini_displayport"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        app:layout_constraintTop_toBottomOf="@+id/questionText" />
 
     <LinearLayout
-        android:id="@+id/options"
+        android:id="@+id/answers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image">
+        app:layout_constraintTop_toBottomOf="@+id/questionImage">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -224,7 +224,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/rollButton"
+        android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/file_card_background_color"
@@ -232,5 +232,5 @@
         android:textColor="@color/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/options" />
+        app:layout_constraintTop_toBottomOf="@+id/answers" />
 </androidx.constraintlayout.widget.ConstraintLayout>
