@@ -1,28 +1,30 @@
 package com.example.noted;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
 
-public class Quiz extends GlobalAppCompatActivity {
-    ArrayList<QuizQuestionModel> questions = new ArrayList<>();
-    QuizQuestionModel currentQuestion;
-    int currentQuestionIndex;
+public class QuizActivity extends GlobalAppCompatActivity {
+    int currentQuestionIndex, questionsPassed = 0;
     float disabledAlpha = .3f;
+    boolean highlightAnswers = true; // Whether to highlight correct/wrong answers as user clicks from options.
+    QuizQuestionModel currentQuestion;
+    ArrayList<QuizQuestionModel> questions = new ArrayList<>();
     TextView rangeText, questionText;
     ConstraintLayout rangeBackground, rangeSlider;
     LinearLayout answersLayout;
@@ -52,9 +54,9 @@ public class Quiz extends GlobalAppCompatActivity {
     }
 
     private void newQuestion() {
-        // Check if the quiz is over
+        // Check if the quiz is over to show scores
         if (currentQuestion != null && currentQuestionIndex + 1 == questions.size()) {
-            endQuiz();
+            showScores();
             return;
         }
 
@@ -104,10 +106,24 @@ public class Quiz extends GlobalAppCompatActivity {
         rangeText.setText(currentQuestionIndex + 1 + " / " + questions.size());
         // For some reason when the next button is pressed, *part* of the root layout colour is changed to black!
         findViewById(R.id.root).setBackground(new ColorDrawable(Color.parseColor(chosenBackground == null ? defaultBackground : chosenBackground)));
+
+        // Update range slider based to width of the track
+        int width = rangeBackground.getWidth();
+        int range = questions.size() - 1;
+        int current = currentQuestionIndex;
+        // width / range = width per question on the slider, multiply by current question index to get slider width.
+        int newWidth = width / range * current;
+
+        rangeSlider.getLayoutParams().width = newWidth;
+        rangeSlider.requestLayout(); // Apparently might be required https://stackoverflow.com/a/17066696/11848657
     }
 
-    private void endQuiz() {
-        Toast.makeText(this, "Quiz has ended", Toast.LENGTH_SHORT).show();
+    private void showScores() {
+        Intent scoreIntent = new Intent(QuizActivity.this, ScoreActivity.class);
+        scoreIntent.putExtra("passedAndTotal", new int[]{questionsPassed, questions.size()});
+        // developer.android.com/reference/android/content/Intent#constants_1
+        scoreIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(scoreIntent);
     }
 
     private void answerClicked(int index) {
@@ -122,16 +138,19 @@ public class Quiz extends GlobalAppCompatActivity {
         radioButton.setChecked(true);
         nextButton.setEnabled(true);
 
-        // Check if the answer is correct
+        // Answer is correct if the index of the chosen option view is the same as the answer index
         if (index == currentQuestion.getAnswerIndex()) {
-            layout.setBackground(getDrawable(R.drawable.answer_correct_background));
-            radioButton.setButtonTintList(ColorStateList.valueOf(getColor(R.color.answer_correct_color)));
-        } else {
+            questionsPassed++;
+            if (highlightAnswers) {
+                layout.setBackground(getDrawable(R.drawable.answer_correct_background));
+                radioButton.setButtonTintList(ColorStateList.valueOf(getColor(R.color.answer_correct_color)));
+            }
+        } else if (highlightAnswers) {
             layout.setBackground(getDrawable(R.drawable.answer_wrong_background));
             radioButton.setButtonTintList(ColorStateList.valueOf(getColor(R.color.answer_wrong_color)));
 
             // Wait a few seconds then highlight the correct answer
-            new android.os.Handler().postDelayed(() -> {
+            new Handler().postDelayed(() -> {
                 // Make sure user hasn't quickly clicked to next question before the animation has finished
                 if (nextButton.getAlpha() == disabledAlpha)
                     return;
@@ -151,7 +170,7 @@ public class Quiz extends GlobalAppCompatActivity {
                 correctRadio.setButtonTintList(ColorStateList.valueOf(getColor(R.color.answer_correct_color)));
                 transitionDrawable.startTransition(500); // 500 milliseconds is the duration of the transition
                 // https://www.tutorialspoint.com/how-do-you-animate-the-change-of-background-color-of-a-view-on-android
-            }, 500);
+            }, 300);
         }
 
         // Set the next button to visible

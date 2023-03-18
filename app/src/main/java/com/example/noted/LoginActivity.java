@@ -1,6 +1,5 @@
 package com.example.noted;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,10 +64,7 @@ public class LoginActivity extends GlobalAppCompatActivity {
             }
 
             saveCofig("loggedInUser", username);
-            Intent intent = new Intent(LoginActivity.this, ManageActivity.class);
-            //developer.android.com/reference/android/content/Intent#constants_1
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            replaceActivity(LoginActivity.this, ManageActivity.class);
         });
 
         // debugAutoFill(usernameField, passwordField, submitButton);

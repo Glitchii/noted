@@ -58,10 +58,10 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
      * @param newActivityClass       eg. Y.class
      */
     protected void replaceActivity(Context currentActivityContext, Class newActivityClass) {
-        Intent loginIntent = new Intent(currentActivityContext, newActivityClass);
-        //developer.android.com/reference/android/content/Intent#constants_1
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(loginIntent);
+        Intent newIntent = new Intent(currentActivityContext, newActivityClass);
+        // Set flags to replace currentActivityContext without saving stack history (developer.android.com/reference/android/content/Intent#constants_1)
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newIntent);
     }
 
     @Override
@@ -138,11 +138,7 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     }
 
     protected void toLoginActivity() {
-        Intent loginIntent = new Intent(this, LoginActivity.class);
-        //developer.android.com/reference/android/content/Intent
-        //developer.android.com/reference/android/content/Intent#constants_1
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(loginIntent);
+        replaceActivity(this, LoginActivity.class);
     }
 
     protected void setBackground(String hex) {
@@ -171,6 +167,8 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
      * @see #configure(int layout)
      */
     protected void configure() {
+        // Required to get data from previous intents
+        intent = getIntent();
         // Retrieve username from intent/storage and configure it for the activity.
         checkConfigs();
         // Configure action bar colour and background

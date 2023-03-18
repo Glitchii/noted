@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/uiBackground"
     android:paddingHorizontal="@dimen/padding_horizontal"
-    tools:context=".Quiz">
+    tools:context=".QuizActivity">
 
     <TextView
         android:id="@+id/filesTitle"
@@ -58,7 +58,7 @@
         android:id="@+id/rangeSlider"
         android:layout_width="180dp"
         android:layout_height="10dp"
-        android:background="@drawable/answer_correct_background"
+        android:background="@drawable/slider_background"
         app:layout_constraintBottom_toBottomOf="@+id/rangeBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/rangeBackground" />

@@ -16,7 +16,10 @@
         android:theme="@style/Theme.Noted"
         tools:targetApi="31">
         <activity
-            android:name=".Quiz"
+            android:name=".ScoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizActivity"
             android:exported="false" />
         <activity
             android:name=".CalculatorActivity"

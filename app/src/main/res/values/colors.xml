@@ -23,10 +23,11 @@
     <color name="answer_correct_color">#7AA183</color>
     <color name="answer_wrong_color">#9B7474</color>
     <color name="answer_color">#6879B5</color>
+    <color name="slider_color">#6879B5</color>
 
     <!-- Calculator -->
     <color name="calculator_background">@color/uiBackground</color>
-    <color name="calculator_display">#2D2B30</color>
+    <color name="calculator_display">#242225</color>
     <color name="calculator_display2">#3c302d</color>
     <color name="calculator_display_down">#272627</color>
     <color name="calculator_button">#545356</color>
