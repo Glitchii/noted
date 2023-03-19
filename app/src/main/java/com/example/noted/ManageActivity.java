@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ManageActivity extends GlobalAppCompatActivity {
     ArrayList<FileCardModel> fileCardModels = new ArrayList<>();
@@ -77,8 +79,10 @@ public class ManageActivity extends GlobalAppCompatActivity {
 
         // Floating 'add' action button setup
         findViewById(R.id.fab).setOnClickListener(v -> {
-            // Create new file on system
-            String fileName = Utils.createFile(Utils.getCustomFilesDir(this), username);
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+            String fileName = username + " " + timestamp;
+
+            Utils.createFile(Utils.getCustomFilesDir(this), fileName);
             // Add filename and file size to ArrayList and update RecyclerView UI
             fileCardModels.add(new FileCardModel(fileName, "0 bytes"));
             fileCardRecyclerViewAdapter.notifyDataSetChanged();

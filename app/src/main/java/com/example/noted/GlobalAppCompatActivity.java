@@ -142,22 +142,23 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     }
 
     protected void setBackground(String hex) {
+        int color = Color.parseColor(hex);
+        ColorDrawable colorDrawable = new ColorDrawable(color);
         View root = findViewById(R.id.root);
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor(hex));
 
         if (root == null)
             return;
 
         // Change background colour
-        root.setBackground(colorDrawable);
+        root.setBackgroundColor(color);
         // Change navigation bar background colour
-        getWindow().setNavigationBarColor(Color.parseColor(hex));
+        getWindow().setNavigationBarColor(color);
 
         if (topSectionMatchesTheme) {
             // Change action bar background colour
             getSupportActionBar().setBackgroundDrawable(colorDrawable);
             // Change status bar background colour
-            getWindow().setStatusBarColor(Color.parseColor(hex));
+            getWindow().setStatusBarColor(color);
         }
     }
 
@@ -175,27 +176,39 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         actionBarConfig(this, username);
     }
 
-    protected void animateIn(View v) {
-        animateIn(v, 1);
+    /**
+     * Fade in animation
+     *
+     * @param v View to fade in
+     * @see #fadeIn(View v, int duration)
+     */
+    protected void fadeIn(View v) {
+        fadeIn(v, 1);
     }
 
-    protected void animateOut(View v) {
-        animateOut(v, 500);
+    protected void fadeOut(View v) {
+        fadeOut(v, 500);
     }
 
-    protected void animateIn(View v, int duration) {
-        animateIn(v, 1, duration);
+    /**
+     * Fade in animation (https://stackoverflow.com/a/36660424/11848657)
+     *
+     * @param v        View to fade in
+     * @param duration duration
+     */
+    protected void fadeIn(View v, int duration) {
+        fadeIn(v, 1, duration);
     }
 
-    protected void animateIn(View v, float maxAlpha) {
-        animateIn(v, maxAlpha, 500);
+    protected void fadeIn(View v, float maxAlpha) {
+        fadeIn(v, maxAlpha, 500);
     }
 
-    protected void animateOut(View v, int duration) {
+    protected void fadeOut(View v, int duration) {
         v.animate().alpha(0f).setDuration(duration).start();
     }
 
-    protected void animateIn(View v, float maxAlpha, int duration) {
+    protected void fadeIn(View v, float maxAlpha, int duration) {
         v.animate().alpha(maxAlpha).setDuration(duration).start();
     }
 }

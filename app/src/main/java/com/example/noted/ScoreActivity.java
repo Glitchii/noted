@@ -26,8 +26,12 @@ public class ScoreActivity extends GlobalAppCompatActivity {
         for (int i = 0; i < stars; i++)
             scoreStars.getChildAt(i).setAlpha(1);
 
-
         Button tryAgainButton = findViewById(R.id.tryAgainButton);
+        Button saveToFileButton = findViewById(R.id.saveScore);
+
         tryAgainButton.setOnClickListener(v -> startActivity(new Intent(ScoreActivity.this, QuizActivity.class)));
+        saveToFileButton.setOnClickListener(v -> {
+            
+        });
     }
 }

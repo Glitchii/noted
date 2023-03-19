@@ -108,28 +108,28 @@
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="#131714" />
+                android:backgroundTint="@color/suggestedColor1" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cs2"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="#191211" />
+                android:backgroundTint="@color/suggestedColor2" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cs3"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="#171721" />
+                android:backgroundTint="@color/suggestedColor3" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cs4"
                 android:layout_width="30dp"
                 android:layout_height="38dp"
                 android:layout_marginHorizontal="10dp"
-                android:backgroundTint="#181406" />
+                android:backgroundTint="@color/suggestedColor4" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

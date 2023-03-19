@@ -25,21 +25,19 @@ public class BackgroundSwitcherActivity extends GlobalAppCompatActivity {
         LinearLayout suggestionsBox = findViewById(R.id.suggestionsBox);
         resetButton = findViewById(R.id.resetButton);
 
-        // Focus into hex box and show keyboard after 200ms (https://stackoverflow.com/a/7784904/11848657)
+        // Focus into input field. This shouldn't show the keyboard
+        hexBox.requestFocus();
+        // Show keyboard after a few milliseconds (https://stackoverflow.com/a/7784904/11848657)
         new Handler().postDelayed(() -> {
-            // Focus into input field. Might not show keyboard
-            hexBox.requestFocus();
-            // Additional code to show the keyboard
             hexBox.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN, 0f, 0f, 0));
             hexBox.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, 0f, 0f, 0));
-
-
         }, 2500);
 
         new Handler().postDelayed(() -> Toast.makeText(this, "Colour persists after app restarts", Toast.LENGTH_SHORT).show(), 200);
 
+        // Show reset button is background colour was previously changed by user.
         if (chosenBackground != null)
-            animateIn(resetButton);
+            fadeIn(resetButton);
 
         hexBox.addTextChangedListener(new TextWatcher() {
             // https://developer.android.com/reference/android/text/TextWatcher
@@ -66,25 +64,29 @@ public class BackgroundSwitcherActivity extends GlobalAppCompatActivity {
 
         for (int i = 0; i < suggestionsBox.getChildCount(); i++) {
             View view = suggestionsBox.getChildAt(i);
-
             view.setOnClickListener(l -> {
                 if (view.getId() == R.id.cs1)
-                    saveBackground("#131714");
+                    saveBackground(toHex(R.color.suggestedColor1));
                 else if (view.getId() == R.id.cs2)
-                    saveBackground("#191211");
+                    saveBackground(toHex(R.color.suggestedColor2));
                 else if (view.getId() == R.id.cs3)
-                    saveBackground("#171721");
+                    saveBackground(toHex(R.color.suggestedColor3));
                 else if (view.getId() == R.id.cs4)
-                    saveBackground("#181406");
+                    saveBackground(toHex(R.color.suggestedColor4));
             });
         }
 
         resetButton.setOnClickListener(v -> {
-            saveBackground(defaultBackground);
             resetButtonShown = false;
-            animateOut(resetButton);
+            saveBackground(defaultBackground);
+            fadeOut(resetButton);
             deleteConfig("background");
         });
+    }
+
+    private String toHex(int res) {
+        String hex = Integer.toHexString(getColor(res)); // ffXXXXXX
+        return '#' + hex.substring(2); // #XXXXXX
     }
 
     protected void saveBackground(String hex) {
@@ -98,8 +100,7 @@ public class BackgroundSwitcherActivity extends GlobalAppCompatActivity {
 
         // Show reset button
         if (!resetButtonShown) {
-            // Fade in animation (https://stackoverflow.com/a/36660424/11848657)
-            animateIn(resetButton);
+            fadeIn(resetButton);
             resetButtonShown = true;
         }
     }

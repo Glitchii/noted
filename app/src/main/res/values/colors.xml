@@ -40,4 +40,10 @@
     <color name="calculator_buttons3">#35303F</color>
     <color name="calculator_buttons4">#2D2B30</color>
     <color name="calculator_buttons5">#292120</color>
+
+    <!--  Background Switcher  -->
+    <color name="suggestedColor1">#131714</color>
+    <color name="suggestedColor2">#191211</color>
+    <color name="suggestedColor3">#171721</color>
+    <color name="suggestedColor4">#181406</color>
 </resources>

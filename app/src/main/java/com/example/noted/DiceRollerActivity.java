@@ -27,9 +27,9 @@ public class DiceRollerActivity extends GlobalAppCompatActivity {
      * Picks a number and performs transition animations
      */
     private void roll() {
-        animateIn(emptyDice, 200);
-        animateOut(dice);
-        animateOut(rolledText);
+        fadeIn(emptyDice, 200);
+        fadeOut(dice);
+        fadeOut(rolledText);
 
         // int randomNumber = (int) Math.ceil(Math.random() * 6);
         int randomNumber = new Random().nextInt(6) + 1;
@@ -57,9 +57,9 @@ public class DiceRollerActivity extends GlobalAppCompatActivity {
             }
 
             rolledText.setText(Integer.toString(randomNumber));
-            animateIn(dice);
-            animateOut(emptyDice);
-            animateIn(rolledText, .6f);
+            fadeIn(dice);
+            fadeOut(emptyDice);
+            fadeIn(rolledText, .6f);
         }, 500);
     }
 

@@ -14,6 +14,6 @@ public class MainActivity extends GlobalAppCompatActivity {
             replaceActivity(MainActivity.this, LoginActivity.class);
         else
             // Otherwise if someone is logged in, we skip login page util they logout.
-            replaceActivity(MainActivity.this, QuizActivity.class);
+            replaceActivity(MainActivity.this, ManageActivity.class);
     }
 }

@@ -2,8 +2,6 @@ package com.example.noted;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
@@ -104,8 +102,6 @@ public class QuizActivity extends GlobalAppCompatActivity {
         }
 
         rangeText.setText(currentQuestionIndex + 1 + " / " + questions.size());
-        // For some reason when the next button is pressed, *part* of the root layout colour is changed to black!
-        findViewById(R.id.root).setBackground(new ColorDrawable(Color.parseColor(chosenBackground == null ? defaultBackground : chosenBackground)));
 
         // Update range slider based to width of the track
         int width = rangeBackground.getWidth();

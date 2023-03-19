@@ -7,28 +7,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Utils {
-
-    /**
-     * Creates a new file using username and timestamp as the file name
-     *
-     * @return The new file name
-     */
-    public static String createFile(File filesDir, String username) {
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
-        String fileName = username + " " + timestamp;
-
-        try {
-            new File(filesDir, fileName).createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return fileName;
-    }
 
     /**
      * Deletes a file from the 'custom_files' directory
@@ -89,5 +69,21 @@ public class Utils {
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(content.getBytes());
         fos.close();
+    }
+
+    /**
+     * Creates a new file on the system
+     *
+     * @return Boolean output of createNewFile()
+     */
+    public static boolean createFile(File filesDir, String fileName) {
+        boolean created = false;
+        try {
+            created = new File(filesDir, fileName).createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return created;
     }
 }
