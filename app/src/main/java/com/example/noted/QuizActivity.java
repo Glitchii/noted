@@ -117,8 +117,6 @@ public class QuizActivity extends GlobalAppCompatActivity {
     private void showScores() {
         Intent scoreIntent = new Intent(QuizActivity.this, ScoreActivity.class);
         scoreIntent.putExtra("passedAndTotal", new int[]{questionsPassed, questions.size()});
-        // developer.android.com/reference/android/content/Intent#constants_1
-        scoreIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(scoreIntent);
     }
 

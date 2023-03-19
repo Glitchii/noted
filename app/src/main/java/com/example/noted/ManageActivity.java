@@ -82,7 +82,7 @@ public class ManageActivity extends GlobalAppCompatActivity {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
             String fileName = username + " " + timestamp;
 
-            Utils.createFile(Utils.getCustomFilesDir(this), fileName);
+            Utils.createFile(new File(Utils.getCustomFilesDir(this), fileName));
             // Add filename and file size to ArrayList and update RecyclerView UI
             fileCardModels.add(new FileCardModel(fileName, "0 bytes"));
             fileCardRecyclerViewAdapter.notifyDataSetChanged();

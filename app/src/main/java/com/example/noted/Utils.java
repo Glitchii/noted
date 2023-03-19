@@ -65,6 +65,11 @@ public class Utils {
         return stringBuilder.toString();
     }
 
+    /**
+     * Writes to file given the path to it and content
+     *
+     * @throws Exception
+     */
     public static void writeToFile(File file, String content) throws Exception {
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(content.getBytes());
@@ -74,12 +79,13 @@ public class Utils {
     /**
      * Creates a new file on the system
      *
-     * @return Boolean output of createNewFile()
+     * @param file File object of the file to be created
+     * @return Boolean output of (File.)createNewFile()
      */
-    public static boolean createFile(File filesDir, String fileName) {
+    public static boolean createFile(File file) {
         boolean created = false;
         try {
-            created = new File(filesDir, fileName).createNewFile();
+            created = file.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
