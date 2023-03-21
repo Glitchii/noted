@@ -11,18 +11,26 @@ public class LoginActivity extends GlobalAppCompatActivity {
     // Define a HashMap to store valid usernames and passwords
     private final HashMap<String, String> users = new HashMap<>();
 
-    // Inserts text into the username and password fields for testing purposes.
-    private void debugAutoFill(EditText username, EditText password, Button submit) {
-        username.setText("john");
-        password.setText("password");
-        submit.performClick();
+    /**
+     * Static method to check whether a username and corresponding password are correct and valid
+     * based on a provided hashmap
+     */
+    public static boolean isValidLogin(String username, String password, HashMap<String, String> hashMap) {
+        // Shouldn't matter the case of the username
+        username = username.toLowerCase();
+
+        // Return false if username or password is empty
+        if (username.isEmpty() || password.isEmpty())
+            return false;
+
+        // Return whether the username and corresponding password are in the hashmap
+        return hashMap.containsKey(username) && hashMap.get(username).equals(password);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Login is not required on login page
         loginRequired = false;
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
@@ -39,7 +47,7 @@ public class LoginActivity extends GlobalAppCompatActivity {
         users.put("joshua", "Joshua123");
         users.put("david", "abc123");
 
-        // Find views
+        // View variable declarations
         Button submitButton = findViewById(R.id.submitButton);
         EditText usernameField = findViewById(R.id.usernameField);
         EditText passwordField = findViewById(R.id.passwordField);
@@ -48,17 +56,10 @@ public class LoginActivity extends GlobalAppCompatActivity {
         // Set click listener on submit button
         submitButton.setOnClickListener(v -> {
             // Get the values entered in the text fields
-            String username = usernameField.getText().toString().toLowerCase();
+            String username = usernameField.getText().toString();
             String password = passwordField.getText().toString();
 
-            // Check if username and password are empty
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter a username and password.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Check if username and password are correct using the HashMap
-            if (!(users.containsKey(username) && users.get(username).equals(password))) {
+            if (!isValidLogin(username, password, users)) {
                 Toast.makeText(this, "Incorrect username or password.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -66,7 +67,5 @@ public class LoginActivity extends GlobalAppCompatActivity {
             saveCofig("loggedInUser", username);
             replaceActivity(LoginActivity.this, ManageActivity.class);
         });
-
-        // debugAutoFill(usernameField, passwordField, submitButton);
     }
 }

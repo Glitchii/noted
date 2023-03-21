@@ -21,7 +21,9 @@ public class Utils {
     }
 
     /**
-     * Returns the 'custom_files' directory, creating it if it doesn't exist
+     * Returns the 'custom_files' directory, creating it if it doesn't exist.
+     * The custom files directory is the directory where files created by
+     * a user from {@link ManageActivity} are are stored.
      *
      * @return The 'custom_files' directory
      */
