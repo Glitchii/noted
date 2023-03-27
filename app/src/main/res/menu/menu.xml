@@ -20,6 +20,9 @@
             <item
                 android:id="@+id/action_dice_roller"
                 android:title="Dice Roller" />
+            <item
+                android:id="@+id/action_learn_french"
+                android:title="Learn French" />
         </menu>
     </item>
 

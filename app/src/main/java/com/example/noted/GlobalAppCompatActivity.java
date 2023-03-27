@@ -52,7 +52,7 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     * Replaces activity pressing back button from newActivityClass doesn't go to currentActivityContext
+     * Replaces activity. pressing back button from newActivityClass doesn't go to currentActivityContext
      *
      * @param currentActivityContext eg. X.this
      * @param newActivityClass       eg. Y.class
@@ -67,26 +67,35 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Check whether user is still logged in and if a custom background was set etc.
+        // User might be logged out if config file is deleted.
         checkConfigs();
 
         if (chosenBackground == null)
             setBackground(defaultBackground);
     }
 
+    /**
+     * Checks whether a user is logged in and if a custom background was set.
+     */
     private void checkConfigs() {
         if (loginRequired)
             try {
                 // Check whether any user is still logged in.
                 username = getConfigValue("loggedInUser");
-                if (username != null)
-                    // Capitalise the first letter of the username
-                    username = username.substring(0, 1).toUpperCase() + username.substring(1);
-                else {
-                    // Start login activity if no one is logged in.
-                    toLoginActivity();
-                    return;
-                }
 
+                // Throw a SecurityException if no user is logged to be redirected to login page
+                if (username == null)
+                    throw new SecurityException();
+
+                // Check that the username belongs to an existing account.
+                if (!Utils.getAccountsMap().containsKey(username))
+                    throw new SecurityException();
+
+                // Capitalise the first letter of the username
+                username = Utils.cap(username);
+            } catch (SecurityException e) {
+                toLoginActivity();
             } catch (Exception e) {
                 Log.d("DEBUG_LOGIN_SAVE", e.toString());
                 Toast.makeText(this, "Failed finding who is logged in", Toast.LENGTH_SHORT).show();
@@ -104,6 +113,13 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saves config to file. Config can include custom background colour, currently logged in user, etc.
+     *
+     * @param key
+     * @param value
+     * @return
+     */
     protected boolean saveCofig(String key, String value) {
         // Could use Shared-Preferences (https://developer.android.com/training/data-storage/shared-preferences)
         // Instead of creating a custom file but no need for a small project like this since this also works.
@@ -113,7 +129,6 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
             fos.write(value.getBytes());
             fos.close();
         } catch (Exception e) {
-            Log.d("DEBUG_LOGIN", e.toString());
             Toast.makeText(this, "Failed saving info.", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -121,26 +136,54 @@ public class GlobalAppCompatActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Logout out. Deletes 'loggedInUser' config and starts login activity.
+     * Deleting 'loggedInUser' means next time the app is opened, it will start login activity.
+     */
     protected void logout() {
         deleteConfig("loggedInUser");
         toLoginActivity();
     }
 
+    /**
+     * Gets config value from file.
+     *
+     * @param key config key
+     * @return config value or null if not found
+     * @throws Exception
+     * @see #saveCofig(String, String)
+     */
+    protected String getConfigValue(String key) throws Exception {
+        File file = new File(getFilesDir(), '.' + key);
+        return file.exists() ? Utils.readFile(file) : null;
+    }
+
+    /**
+     * Deletes config file
+     *
+     * @param key config key
+     */
     protected void deleteConfig(String key) {
         File file = new File(getFilesDir(), '.' + key);
         if (file.exists())
             file.delete();
     }
 
-    protected String getConfigValue(String key) throws Exception {
-        File file = new File(getFilesDir(), '.' + key);
-        return file.exists() ? Utils.readFile(file) : null;
-    }
-
+    /**
+     * Replaces current activity with login activity.
+     * This is used when user logs out or when user is not logged in.
+     *
+     * @see #replaceActivity(Context, Class)
+     */
     protected void toLoginActivity() {
         replaceActivity(this, LoginActivity.class);
     }
 
+    /**
+     * Sets custom background colour to activity
+     *
+     * @param hex Hex string eg. #RRGGBB
+     */
     protected void setBackground(String hex) {
         int color = Color.parseColor(hex);
         ColorDrawable colorDrawable = new ColorDrawable(color);

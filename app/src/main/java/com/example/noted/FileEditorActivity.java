@@ -1,7 +1,6 @@
 package com.example.noted;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,7 +25,6 @@ public class FileEditorActivity extends GlobalAppCompatActivity {
         try {
             contentInput.setText(Utils.readFile(oldFile));
         } catch (Exception e) {
-            Log.d("DEBUG_EXCEPTION", e.toString());
             Toast.makeText(this, "Failed retrieving file content. You can still update it.", Toast.LENGTH_LONG).show();
         }
 
@@ -49,7 +47,6 @@ public class FileEditorActivity extends GlobalAppCompatActivity {
             }
 
             if (!oldFile.renameTo(newFile.getAbsoluteFile())) {
-                Log.d("DEBUG_LOG", "Failed moving " + oldFile.getAbsolutePath() + "to" + newFile.getAbsoluteFile());
                 Toast.makeText(this, "Failed renaming file.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -57,7 +54,6 @@ public class FileEditorActivity extends GlobalAppCompatActivity {
             try {
                 Utils.writeToFile(newFile, newContent);
             } catch (Exception e) {
-                Log.d("DEBUG_EXCEPTION", e.toString());
                 Toast.makeText(this, (newFilename.equals(filename)) ? "Failed updating file." : "File renamed but failed updating content.", Toast.LENGTH_SHORT).show();
                 return;
             }

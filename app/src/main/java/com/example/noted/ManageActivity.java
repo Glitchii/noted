@@ -42,6 +42,8 @@ public class ManageActivity extends GlobalAppCompatActivity {
             activity = BackgroundSwitcherActivity.class;
         else if (id == R.id.action_calculator)
             activity = CalculatorActivity.class;
+        else if (id == R.id.action_learn_french)
+            activity = LanguageActivity.class;
 
         if (activity != null)
             startActivity(new Intent(ManageActivity.this, activity));

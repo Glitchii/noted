@@ -42,12 +42,13 @@ public class QuizActivity extends GlobalAppCompatActivity {
         answersLayout = findViewById(R.id.answers);
         nextButton = findViewById(R.id.nextButton);
 
-        // Add a few questions to the quiz
+        // Add a few exercises to the quiz
         questions.add(new QuizQuestionModel(3, "Which is an open-source operating system?", -1, new String[]{"Windows", "MacOS", "iOS", "Linux"}));
         questions.add(new QuizQuestionModel(2, "What type of port is this?", R.drawable.mini_displayport, new String[]{"Mini HDMI", "Thunderbolt 2", "Mini DisplayPort", "Micro USB"}));
         questions.add(new QuizQuestionModel(2, "Which of the following is a popular front-end web development framework?", -1, new String[]{"Django", "Flask", "React", "Express"}));
         questions.add(new QuizQuestionModel(1, "Who is the founder of Microsoft Corporation?", -1, new String[]{"Steve Jobs", "Bill Gates", "Mark Zuckerberg", "Jeff Bezos"}));
 
+        nextButton.setOnClickListener(v -> newQuestion());
         newQuestion();
     }
 
@@ -76,7 +77,7 @@ public class QuizActivity extends GlobalAppCompatActivity {
         // Set answers and radio buttons with on click listeners
         for (int i = 0; i < answersLayout.getChildCount(); i++) {
             final int index = i; // Final variable is required for lambda expressions
-            ConstraintLayout layout = (ConstraintLayout) answersLayout.getChildAt(i);
+            ConstraintLayout layout = (ConstraintLayout) answersLayout.getChildAt(index);
             TextView answer = (TextView) layout.getChildAt(0);
             RadioButton radio = (RadioButton) layout.getChildAt(1);
 
@@ -86,9 +87,8 @@ public class QuizActivity extends GlobalAppCompatActivity {
             radio.setOnClickListener(v -> answerClicked(index));
             answer.setOnClickListener(v -> answerClicked(index));
             layout.setOnClickListener(v -> answerClicked(index));
-            nextButton.setOnClickListener(v -> newQuestion());
 
-            answer.setText(currentQuestion.getAnswers()[i]);
+            answer.setText(currentQuestion.getAnswers()[index]);
         }
 
         // Enable radio buttons, and reset colours from red or green to defaults
@@ -117,6 +117,7 @@ public class QuizActivity extends GlobalAppCompatActivity {
     private void showScores() {
         Intent scoreIntent = new Intent(QuizActivity.this, ScoreActivity.class);
         scoreIntent.putExtra("passedAndTotal", new int[]{questionsPassed, questions.size()});
+        scoreIntent.putExtra("activity", "QuizActivity");
         startActivity(scoreIntent);
     }
 

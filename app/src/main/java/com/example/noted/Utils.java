@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class Utils {
 
@@ -18,6 +19,29 @@ public class Utils {
     public static boolean deleteFile(Context context, String filename) {
         File file = new File(Utils.getCustomFilesDir(context), filename);
         return file.delete();
+    }
+
+    /**
+     * Method to create a HashMap of valid usernames and passwords
+     *
+     * @return HashMap of usernames and passwords
+     */
+    public static HashMap<String, String> getAccountsMap() {
+        HashMap<String, String> accounts = new HashMap<>();
+
+        // Add ten default usernames and passwords to the HashMap
+        accounts.put("john", "password");
+        accounts.put("luke", "123");
+        accounts.put("mark", "abc");
+        accounts.put("james", "321");
+        accounts.put("peter", "cba");
+        accounts.put("mary", "pwd");
+        accounts.put("jane", "asdf");
+        accounts.put("joseph", "Joseph");
+        accounts.put("joshua", "Joshua123");
+        accounts.put("david", "abc123");
+
+        return accounts;
     }
 
     /**
@@ -93,5 +117,17 @@ public class Utils {
         }
 
         return created;
+    }
+
+    /**
+     * Capitalises the first letter of a string and lowercases the rest
+     *
+     * @param text text to transform
+     * @return transformed text
+     */
+    public static String cap(String text) {
+        String char0 = text.substring(0, 1).toUpperCase();
+        String otherChars = text.substring(1).toLowerCase();
+        return char0 + otherChars;
     }
 }

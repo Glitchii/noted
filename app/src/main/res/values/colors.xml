@@ -11,7 +11,9 @@
     <color name="file_card_background_color">#272627</color>
     <color name="file_card2_background_color">#3E3C41</color>
     <color name="answer_correct_background_color">#28302A</color>
+    <color name="answer_correct_background_color_secondary">#1F2120</color>
     <color name="answer_wrong_background_color">#302828</color>
+    <color name="answer_wrong_background_color_secondary">#211F21</color>
     <color name="answer_correct_color">#7AA183</color>
     <color name="answer_wrong_color">#9B7474</color>
     <color name="answer_color">#6879B5</color>

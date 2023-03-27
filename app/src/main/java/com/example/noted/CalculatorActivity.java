@@ -198,13 +198,16 @@ public class CalculatorActivity extends GlobalAppCompatActivity {
                 // Without this check, an input like 'true ? 1 : 0' would evaluate to 1.
                 throw new Exception();
 
-            // We remove braces first so it's easier to replace operators with their corresponding functions eg. ^ with Math.pow
-            text = evalBraces(text)
-                    // Replace out all operators with their corresponding script operators
+            // Replace out all operators with their corresponding script operators
+            text = text
                     .replace('×', '*')
                     .replace('÷', '/')
                     .replace('·', '.')
-                    .replace("%", "/100.0*") // % is for percentage not modulo
+                    .replace("%", "/100.0*"); // % is for percentage not modulo
+
+            // We use 'evalBraces' method eval content is braces first, and replace everything including the braces with the result first
+            // so that it's easier to replace some operators eg. ^ with their corresponding functions eg. Math.pow
+            text = evalBraces(text)
                     // Replace ^ with Math.pow function using with regular expression groups (https://docs.oracle.com/javase/tutorial/essential/regex/groups.html, https://docs.oracle.com/javase/tutorial/essential/regex/pattern.html)
                     .replaceAll("(-?[.0-9]+)\\^(-?[.0-9]+)", "Math.pow($1, $2)") // Regex tested at https://regex101.com/r/vti1r5/3
                     // 5^2^5 would resulted to Math.pow(5, 2)^5 instead of Math.pow(Math.pow(5, 2), 5), so we need to do it again

@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class LoginActivity extends GlobalAppCompatActivity {
     // Define a HashMap to store valid usernames and passwords
-    private final HashMap<String, String> users = new HashMap<>();
+    private final HashMap<String, String> accounts = Utils.getAccountsMap();
 
     /**
      * Static method to check whether a username and corresponding password are correct and valid
@@ -35,18 +35,6 @@ public class LoginActivity extends GlobalAppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        // Add ten default usernames and passwords to the HashMap
-        users.put("john", "password");
-        users.put("luke", "123");
-        users.put("mark", "abc");
-        users.put("james", "321");
-        users.put("peter", "cba");
-        users.put("mary", "pwd");
-        users.put("jane", "asdf");
-        users.put("joseph", "Joseph");
-        users.put("joshua", "Joshua123");
-        users.put("david", "abc123");
-
         // View variable declarations
         Button submitButton = findViewById(R.id.submitButton);
         EditText usernameField = findViewById(R.id.usernameField);
@@ -59,7 +47,7 @@ public class LoginActivity extends GlobalAppCompatActivity {
             String username = usernameField.getText().toString();
             String password = passwordField.getText().toString();
 
-            if (!isValidLogin(username, password, users)) {
+            if (!isValidLogin(username, password, accounts)) {
                 Toast.makeText(this, "Incorrect username or password.", Toast.LENGTH_SHORT).show();
                 return;
             }
